@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpHeight = 2f;
+    private int jumpCount = 0;
+    private int jumpLimit = 2;
 
     private Rigidbody2D body;
     private Vector2 moveInput;
@@ -30,12 +32,28 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
+        //body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
 
-        if (jumpRequested)
+        if (jumpRequested && (jumpCount < jumpLimit))
         {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpHeight);
+            body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+            jumpCount++;
+            //body.linearVelocity = new Vector2(body.linearVelocity.x, jumpHeight);
             jumpRequested = false;
+
         }
+    }
+    void OnCollisionEnter2D(Collision2D Coll)
+    {
+        //if (Coll.gameObject.name == "Floor")
+        //{
+        //Debug.Log(Coll.gameObject.name);
+        //            Debug.Log("Have touched floor");
+        if (Coll.gameObject.name == "Floor")
+        {
+            //Debug.Log(jumpCount);
+            jumpCount = 0;
+        }
+        //}
     }
 }
