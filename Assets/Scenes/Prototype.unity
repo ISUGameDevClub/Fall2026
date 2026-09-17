@@ -369,8 +369,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 5
   jumpHeight: 5
-  jumpCount: 0
-  jumpLimit: 2
 --- !u!70 &1243121308
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -434,7 +432,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1243121310
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,10 +7,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;
     private int jumpCount = 0;
     private int jumpLimit = 2;
+    private bool grounded = true;
 
     private Rigidbody2D body;
     private Vector2 moveInput;
-    private bool jumpRequested;
+    [SerializeField] private bool jumpRequested;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             jumpRequested = true;
+
         }
     }
 
@@ -38,9 +40,14 @@ public class PlayerController : MonoBehaviour
         {
             body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
             jumpCount++;
+
             //body.linearVelocity = new Vector2(body.linearVelocity.x, jumpHeight);
             jumpRequested = false;
 
+        }
+        if (jumpRequested && (jumpCount >= jumpLimit))
+        {
+            jumpRequested = false;
         }
     }
     void OnCollisionEnter2D(Collision2D Coll)
@@ -53,7 +60,15 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log(jumpCount);
             jumpCount = 0;
+            grounded = true;
         }
         //}
+    }
+    void OnCollisionExit2D(Collision2D coll)
+    {
+       // if (coll.gameObject.name == "Floor")
+        //{
+          //  grounded = false;
+       // }
     }
 }
