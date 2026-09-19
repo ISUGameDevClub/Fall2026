@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
+        body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
 
         if (jumpRequested && (jumpCount < jumpLimit))
         {
