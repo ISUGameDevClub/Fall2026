@@ -13,9 +13,25 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     [SerializeField] private bool jumpRequested;
 
+    //private bool jumpRequested;
+    [Header("Player Consumables")]
+    [SerializeField] private GameObject BreadcrumbPrefab;
+    [SerializeField] private int BreadCrumbLimit;
+    public int BreadCrumbAmount;
+    //public GameObject[] breadCrumbArray;
+    //This inputaction variable is because the "void OnPlant()" wasnt working, 
+    //so I did it the way that works in my other project
+    private InputAction Drop;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+    }
+    //Yeah so the start function is because the "void OnPlant()" wasnt working for some reason
+    void Start()
+    {
+        Drop = InputSystem.actions.FindAction("Player/Plant");
+        Drop.performed += ctx => Plant();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -30,6 +46,18 @@ public class PlayerController : MonoBehaviour
             jumpRequested = true;
 
         }
+    }
+    void Plant()
+    {
+
+
+        //Debug.Log("What");
+        if (BreadCrumbAmount < BreadCrumbLimit)
+        {
+            GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y - .75f, transform.position.z), Quaternion.identity);
+            BreadCrumbAmount++;
+        }
+        
     }
 
     private void FixedUpdate()

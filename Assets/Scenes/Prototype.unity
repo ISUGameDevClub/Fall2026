@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 1243121308}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,6 +370,9 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 3.3
   jumpRequested: 0
+  BreadcrumbPrefab: {fileID: 4791326648646073533, guid: 77d0a2850dab0e54aa359af80f6dba35, type: 3}
+  BreadCrumbLimit: 3
+  BreadCrumbAmount: 0
 --- !u!70 &1243121308
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -507,6 +510,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f5073c65-cf2d-4c01-b7c7-f9a08b2e7e8a
     m_ActionName: 'Player/Swing[/Keyboard/e,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9388fd1f-b680-47a8-8c10-d0b2240e1cc6
+    m_ActionName: 'Player/Plant[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
