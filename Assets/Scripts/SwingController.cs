@@ -7,6 +7,7 @@ public class SwingController : MonoBehaviour
     [SerializeField] private string hookTag = "Hook";
 
     private DistanceJoint2D swingJoint;
+    private InputAction swingAction;
 
     private void Awake()
     {
@@ -14,6 +15,31 @@ public class SwingController : MonoBehaviour
         swingJoint.enabled = false;
         swingJoint.autoConfigureDistance = false;
         swingJoint.maxDistanceOnly = false;
+
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        if (playerInput != null && playerInput.actions != null)
+        {
+            swingAction = playerInput.actions.FindAction("Swing");
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (swingAction != null)
+        {
+            swingAction.performed += OnSwing;
+            swingAction.canceled += OnSwing;
+            swingAction.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (swingAction != null)
+        {
+            swingAction.performed -= OnSwing;
+            swingAction.canceled -= OnSwing;
+        }
     }
 
     public void OnSwing(InputAction.CallbackContext context)

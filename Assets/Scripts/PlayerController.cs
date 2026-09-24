@@ -5,17 +5,60 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpHeight = 2f;
-    private int jumpCount = 0;
-    private int jumpLimit = 2;
-    private bool grounded = true;
+    [SerializeField] private int jumpLimit = 2;
 
+    private int jumpCount;
     private Rigidbody2D body;
+    private InputAction moveAction;
+    private InputAction jumpAction;
     private Vector2 moveInput;
-    [SerializeField] private bool jumpRequested;
+    private bool jumpRequested;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+
+        if (playerInput != null && playerInput.actions != null)
+        {
+            moveAction = playerInput.actions.FindAction("Move");
+            jumpAction = playerInput.actions.FindAction("Jump");
+        }
+
+        if (body == null)
+        {
+            Debug.LogError("PlayerController needs a Rigidbody2D on the same GameObject.", this);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (moveAction != null)
+        {
+            moveAction.performed += OnMove;
+            moveAction.canceled += OnMove;
+            moveAction.Enable();
+        }
+
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJump;
+            jumpAction.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (moveAction != null)
+        {
+            moveAction.performed -= OnMove;
+            moveAction.canceled -= OnMove;
+        }
+
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJump;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -34,41 +77,36 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (body == null)
+        {
+            return;
+        }
+
         body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
 
-        if (jumpRequested && (jumpCount < jumpLimit))
+        if (!jumpRequested)
+        {
+            return;
+        }
+
+        jumpRequested = false;
+
+        if (jumpCount < jumpLimit)
         {
             body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
             jumpCount++;
-
-            //body.linearVelocity = new Vector2(body.linearVelocity.x, jumpHeight);
-            jumpRequested = false;
-
-        }
-        if (jumpRequested && (jumpCount >= jumpLimit))
-        {
-            jumpRequested = false;
         }
     }
-    void OnCollisionEnter2D(Collision2D Coll)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (Coll.gameObject.name == "Floor")
-        //{
-        //Debug.Log(Coll.gameObject.name);
-        //            Debug.Log("Have touched floor");
-        if (Coll.gameObject.name == "Floor")
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            //Debug.Log(jumpCount);
-            jumpCount = 0;
-            grounded = true;
+            if (contact.normal.y > 0.5f)
+            {
+                jumpCount = 0;
+                return;
+            }
         }
-        //}
-    }
-    void OnCollisionExit2D(Collision2D coll)
-    {
-       // if (coll.gameObject.name == "Floor")
-        //{
-          //  grounded = false;
-       // }
     }
 }
