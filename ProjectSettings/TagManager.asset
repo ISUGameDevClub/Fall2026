@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Hook
+  - Platfrom
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - player
   - 
   - 
   - 
@@ -41,6 +42,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 4024221295
+    locked: 0
+  - name: Ground
+    uniqueID: 696940881
     locked: 0
   m_RenderingLayers:
   - Default
