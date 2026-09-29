@@ -95,6 +95,9 @@ public class WhackARatManager : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
+
+        score = 0;
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
     }
 
     public void TogglePuzzle()

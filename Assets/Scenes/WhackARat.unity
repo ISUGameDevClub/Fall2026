@@ -963,6 +963,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 933169777}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &583825193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +1095,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 274719005}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!1 &631519297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,6 +1255,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 1899550550}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &788028711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,6 +1545,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 352669034}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &950092168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,6 +1815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 85472287}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &1167887846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,6 +2046,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 1650336617}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &1346497489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2513,6 +2537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 2086478402}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &1561287618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2903,6 +2931,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 1159433398}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &1659823372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3306,6 +3338,114 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 622217156}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2038753450}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 583825192}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 788028710}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1659823371}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1346497488}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1561287617}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 950092167}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1167887845}
+        m_TargetAssemblyTypeName: PopUpRat, Assembly-CSharp
+        m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1797822720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,6 +3804,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rat
   rat: {fileID: 368678478}
+  popUpRangeStart: 1
+  popUpRangeEnd: 6
+  durationRangeStart: 1
+  durationRangeEnd: 3
 --- !u!114 &2038753451
 MonoBehaviour:
   m_ObjectHideFlags: 0

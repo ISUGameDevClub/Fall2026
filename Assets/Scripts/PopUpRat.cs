@@ -98,4 +98,15 @@ public class PopUpRat : MonoBehaviour
         rat.SetActive(false);
         wasHit = true;
     }
+
+    // method called when puzzle window opened to reset puzzle
+    public void ResetPuzzle()
+    {
+        rat.SetActive(false);
+        popUpTimer = 0f;
+        popUpEnd = SetRandomEnd(0);
+        durationTimer = 0f;
+        durationEnd = SetRandomEnd(1);
+        wasHit = false;
+    }
 }
