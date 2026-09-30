@@ -18,13 +18,18 @@ public class SwingController : MonoBehaviour
 
     public void OnSwing(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (PlayerController.instance.ableToMove)
         {
-            AttachToNearestHook();
-        }
-        else if (context.canceled)
-        {
-            ReleaseSwing();
+
+
+            if (context.performed)
+            {
+                AttachToNearestHook();
+            }
+            else if (context.canceled)
+            {
+                ReleaseSwing();
+            }
         }
     }
 
