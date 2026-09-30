@@ -130,7 +130,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_Direction: 0
 --- !u!114 &-5601835576782102711
 MonoBehaviour:
@@ -144,8 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7a47e3097fbca4386d99fa0cd2994b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreadCrumbBehavior
+  collectable: 0
   thrown: 0
   speed: 10
+  parent: {fileID: 0}
+  target: {fileID: 0}
+  mousePos: {x: 0, y: 0, z: 0}
+  thing: 0.9
 --- !u!50 &8890046722194673152
 Rigidbody2D:
   serializedVersion: 5

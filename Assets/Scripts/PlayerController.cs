@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
+    //private float walkSpeed;
     [SerializeField] private float jumpHeight = 2f;
     private int jumpCount = 0;
     private int jumpLimit = 2;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private InputAction Drop;
     private InputAction Throw;
     public static PlayerController instance;
+    public float range;
 
     private void Awake()
     {
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
         Throw.performed += ctx => ThrowObject();
         ableToMove = true;
         aiming = false;
+        //walkSpeed = speed;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -84,6 +87,10 @@ public class PlayerController : MonoBehaviour
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
             GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y - .75f, transform.position.z), Quaternion.identity);
+            BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
+            BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
+            BCGO.GetComponent<BreadCrumbBehavior>().thrown = false;
+            
             BreadCrumbAmount++;
         }
 
@@ -92,9 +99,15 @@ public class PlayerController : MonoBehaviour
     {
         if (aiming && (BreadCrumbAmount < BreadCrumbLimit))
         {
-            GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y - .75f, transform.position.z), Quaternion.identity);
+            GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             BreadCrumbAmount++;
-            BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
+            //BCGO.GetComponent<BreadCrumbBehavior>().CurrentPosition = new Vector2(mousePos.x, mousePos.y);
+            //BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
+            BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
+            BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
+            BCGO.GetComponent<BreadCrumbBehavior>().thrown=true;
+            //BCGO.GetComponent<BreadCrumbBehavior>().mousePos = new Vector2(mousePos.x, mousePos.y);
+            //BCGO.GetComponent<Rigidbody2D>().AddForce(Vector2.one * 250);
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownRight = true;
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
         }
@@ -120,13 +133,27 @@ public class PlayerController : MonoBehaviour
                 jumpRequested = false;
             }
         }
-        if (aiming)
+        else if (aiming)
         {
-            mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.nearClipPlane));
-            Reticle.transform.position = mousePos;
+            
+            //if (Vector2.Distance(transform.position, Reticle.transform.position) > range)
+            //{
+                //Debug.Log("Out of range");
+            //}
+            //else
+             mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.nearClipPlane));
+            
+            if (Vector2.Distance(transform.position, mousePos) < range)
+            {
+                Reticle.transform.position = mousePos;
             if (mousePos.y > transform.position.y)
             {
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if (mousePos.y < transform.position.y)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
             }
         }
     }
@@ -136,6 +163,11 @@ public class PlayerController : MonoBehaviour
         aiming = true;
         Reticle.SetActive(true);
         gameObject.GetComponent<SwingController>().enabled = false;
+        body.linearVelocity = new Vector2(0, 0);
+        moveInput = new Vector2(0, 0);
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.nearClipPlane));
+        Reticle.transform.position = mousePos;
+        //speed = 0;
     }
     void EndAim()
     {
@@ -143,6 +175,8 @@ public class PlayerController : MonoBehaviour
         aiming = false;
         Reticle.SetActive(false);
         gameObject.GetComponent<SwingController>().enabled = true;
+        //speed = walkSpeed;
+        
     }
     void OnCollisionEnter2D(Collision2D Coll)
     {
@@ -150,7 +184,7 @@ public class PlayerController : MonoBehaviour
         //{
         //Debug.Log(Coll.gameObject.name);
         //            Debug.Log("Have touched floor");
-        if (Coll.gameObject.name == "Floor")
+        if (Coll.gameObject.CompareTag("Floor"))
         {
             //Debug.Log(jumpCount);
             jumpCount = 0;
