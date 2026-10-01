@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,6 +48,7 @@ public class SwingController : MonoBehaviour
 
         swingJoint.distance = Vector2.Distance(transform.position, nearestHook.transform.position);
         swingJoint.enabled = true;
+        swingJoint.enableCollision = true;
     }
 
     private GameObject FindNearestHook()
@@ -68,7 +70,7 @@ public class SwingController : MonoBehaviour
         return nearestHook;
     }
 
-    private void ReleaseSwing()
+    public void ReleaseSwing()
     {
         swingJoint.enabled = false;
         swingJoint.connectedBody = null;
