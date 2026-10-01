@@ -16,9 +16,9 @@ public class BreadCrumbBehavior : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D coll)
     {
+        Debug.Log("Destroy gameobject");
         if (coll.gameObject.CompareTag("Player") && collectable)
         {
-            //Debug.Log("Destroy gameobject");
             coll.gameObject.GetComponent<PlayerController>().BreadCrumbAmount--;
             Destroy(gameObject);
         }
