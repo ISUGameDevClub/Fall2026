@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private InputAction Throw;
     public static PlayerController instance;
     public float range;
+    [SerializeField] GameObject RangeCircle;
 
     private void Awake()
     {
@@ -167,6 +168,9 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector2(0, 0);
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, Camera.main.nearClipPlane));
         Reticle.transform.position = mousePos;
+        RangeCircle.SetActive(true);
+        //range = (RangeCircle.transform.localScale.x/2);
+        RangeCircle.transform.localScale = new Vector3(range * 2, range * 2, range * 2);
         //speed = 0;
     }
     void EndAim()
@@ -175,6 +179,8 @@ public class PlayerController : MonoBehaviour
         aiming = false;
         Reticle.SetActive(false);
         gameObject.GetComponent<SwingController>().enabled = true;
+        RangeCircle.SetActive(false);
+        //
         //speed = walkSpeed;
         
     }
