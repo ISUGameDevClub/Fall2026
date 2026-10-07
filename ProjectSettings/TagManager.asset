@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hook
   - Floor
+  - PoisonObstacle
   layers:
   - Default
   - TransparentFX
