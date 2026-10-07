@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     //Yeah so the start function is because the "void OnPlant()" wasnt working for some reason
     void Start()
     {
+        Application.targetFrameRate = 60;
         Drop = InputSystem.actions.FindAction("Player/Plant");
         Aim = InputSystem.actions.FindAction("Player/Aim");
         Aim.performed += ctx => StartAim();
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
+            //BCGO is instantiated Breadcrumbs gameobject 
             GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y - .75f, transform.position.z), Quaternion.identity);
             BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
             BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
@@ -190,6 +192,12 @@ public class PlayerController : MonoBehaviour
             jumpCount = 0;
             grounded = true;
         }
+        //Put below into "ontriggerEnter for 
+        /*if (Coll.gameObject.name.Contains("Test"))
+        {
+            Debug.Log(GetComponent<PlayerInput>().currentActionMap.name);
+            Debug.Log("This should show the interact message.");
+        }*/
         //}
     }
     void OnCollisionExit2D(Collision2D coll)
