@@ -98,7 +98,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 7155391608772490188}
+  TilesX: 0
 --- !u!114 &2633105758436093194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +481,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 482443730078493327}
+  TilesX: 0
 --- !u!114 &1755117261163818356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +714,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 7520852741389438271}
+  TilesX: 0
 --- !u!114 &8268436979464784351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +873,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 353225610447474635}
+  TilesX: 0
 --- !u!114 &5186751956905548959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1030,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 3846183669169988686}
+  TilesX: 0
 --- !u!114 &1817707747920442433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1173,7 +1188,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 3323990896321998470}
+  TilesX: 0
 --- !u!114 &2255388359413365108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1403,7 +1421,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 6615003963965174856}
+  TilesX: 0
 --- !u!114 &8071959718424109779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,7 +1579,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 3336286859951224048}
+  TilesX: 0
 --- !u!114 &928119898623874387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1713,7 +1737,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 2234435164039888743}
+  TilesX: 0
 --- !u!114 &5847081329394915696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,7 +1895,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 584148596691397956}
+  TilesX: 0
 --- !u!114 &4851530636164821423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2248,7 +2278,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 6024171325001407287}
+  TilesX: 0
 --- !u!114 &8529183685010524975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2478,7 +2511,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 5589325570994896927}
+  TilesX: 0
 --- !u!114 &1317644123953414717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,7 +2819,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 7761606250569720823}
+  TilesX: 0
 --- !u!114 &1297116428891018066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2938,7 +2977,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 8585444378287525652}
+  TilesX: 0
 --- !u!114 &3788216807809053451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3093,7 +3135,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 421400996511761083}
+  TilesX: 0
 --- !u!114 &5923402284947155497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3248,7 +3293,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 5634225550074436246}
+  TilesX: 0
 --- !u!114 &7251586050435781723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3403,7 +3451,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 5060449763152687571}
+  TilesX: 0
 --- !u!114 &1952463654056607187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3559,7 +3610,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 3428905846265184421}
+  TilesX: 0
 --- !u!114 &7030559284151249376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,7 +3918,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 7447592352861465740}
+  TilesX: 0
 --- !u!114 &1891943865176248468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4236,10 +4293,10 @@ MonoBehaviour:
   - {fileID: 6448886566908491010}
   - {fileID: 1505932214912909753}
   StraightSprite: {fileID: 2229777577124779789, guid: aed50bc98f491d947836020c13e990fc, type: 3}
-  TTileSprite: {fileID: 21300000, guid: 92b028e4176ef3b4e8460824be678ccf, type: 3}
+  TTileSprite: {fileID: -2759201292790948538, guid: 7a4c1f3cf056bfe489218f279bb7384a, type: 3}
   ArmTileSprite: {fileID: 8871400084656329231, guid: bd07ad516987a0148914a6c036281f6c, type: 3}
   StraightFillSprite: {fileID: 21300000, guid: 900b4da0e028bd1459293f62e8c0f02c, type: 3}
-  TTileFillSprite: {fileID: -2759201292790948538, guid: 7a4c1f3cf056bfe489218f279bb7384a, type: 3}
+  TTileFillSprite: {fileID: 21300000, guid: 92b028e4176ef3b4e8460824be678ccf, type: 3}
   ArmTileFillSprite: {fileID: 21300000, guid: 22ff2f50ca6d47d48834036a822799b7, type: 3}
 --- !u!1 &5634225550074436246
 GameObject:
@@ -4490,7 +4547,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 5284604027873715349}
+  TilesX: 0
 --- !u!114 &6807018163090539102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4720,7 +4780,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 6482360384087628947}
+  TilesX: 0
 --- !u!114 &7323003604697094727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5175,7 +5238,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 8258680965875814779}
+  TilesX: 0
 --- !u!114 &1232644654229624450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5405,7 +5471,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 3128054584911891715}
+  TilesX: 0
 --- !u!114 &2466713137368769692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5635,7 +5704,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 4820312710477958175}
+  TilesX: 0
 --- !u!114 &4685293423563217358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5864,7 +5936,10 @@ MonoBehaviour:
   StraightTile: 0
   TTile: 0
   ArmTile: 0
+  solutionTile: 0
+  Tiles: []
   Child: {fileID: 4002600764278236655}
+  TilesX: 0
 --- !u!114 &6313561034981077148
 MonoBehaviour:
   m_ObjectHideFlags: 0
