@@ -30,7 +30,8 @@ public class PipePuzzleManager : MonoBehaviour
                     case 0:
                         Tiles[i].GetComponent<PipePuzzleTile>().StraightTile = true;
                         Tiles[i].GetComponent<Image>().sprite = StraightSprite;
-                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile();
+                        int RotatInt = Random.Range(0, 4);
+                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile(RotatInt);
                         //Tiles[i].GetComponent<PipePuzzleTile>().Child.GetComponent<Image>().sprite = StraightFillSprite;
                         //Tiles[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = StraightFillSprite;
                         //Tile[i].GetComponent<PipePuzzleTile>().TilesX = 
@@ -38,14 +39,16 @@ public class PipePuzzleManager : MonoBehaviour
                     case 1:
                         Tiles[i].GetComponent<PipePuzzleTile>().TTile = true;
                         Tiles[i].GetComponent<Image>().sprite = TTileSprite;
-                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile();
+                        int Rotat1Int = Random.Range(0, 4);
+                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile(Rotat1Int);
                         //Tiles[i].GetComponent<PipePuzzleTile>().Child.GetComponent<Image>().sprite = TTileFillSprite;
                         //Tiles[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = TTileFillSprite;
                         break;
                     case 2:
                         Tiles[i].GetComponent<PipePuzzleTile>().ArmTile = true;
                         Tiles[i].GetComponent<Image>().sprite = ArmTileSprite;
-                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile();
+                        int Rotat2Int = Random.Range(0, 4);
+                        Tiles[i].GetComponent<PipePuzzleTile>().SetTile(Rotat2Int);
                         //Tiles[i].GetComponent<PipePuzzleTile>().Child.GetComponent<Image>().sprite = ArmTileFillSprite;
                         //Tiles[i].transform.GetChild(0).gameObject.GetComponent<Image>().sprite = ArmTileFillSprite;
                         break;
