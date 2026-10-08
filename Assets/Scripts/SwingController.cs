@@ -81,4 +81,9 @@ public class SwingController : MonoBehaviour
             Destroy(swingJoint);
         }
     }
+
+    public float getMaxHookDistance() { return maxHookDistance; }
+
+    public GameObject getNearestHook() { return FindNearestHook(); }
+    //change to bool
 }
