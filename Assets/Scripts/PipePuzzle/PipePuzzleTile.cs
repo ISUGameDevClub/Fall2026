@@ -28,167 +28,321 @@ public class PipePuzzleTile : MonoBehaviour
             {
                 if (StraightTile)
                 {
-                    
-                    if (TilesX > 0)
-                    {
-                        if (TilesX != 5 || TilesX != 10 || TilesX != 15 || TilesX != 20)
-                        {
+                             
+                //   if (TilesX > 0)
+                 //   {
+                   //     if (TilesX == 5 || TilesX == 10 || TilesX == 15 || TilesX == 20)
+                   //     {
 
-                        }
-                        else 
-                        {
-                            
-                       // Debug.Log(Tiles[TilesX - 1].gameObject.name);
-                        }
-                    }
+                     //   }
+                    //    else 
+                    //    {
+                            Debug.Log("why" + gameObject.name);
+                           // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX-1].gameObject.name);
+                   //     }
+                 //   }
                     
-                    if (TilesX < 24)
-                    {
-                        if (TilesX != 4 || TilesX != 9 || TilesX != 14 || TilesX != 19)
-                        {
+                //    if (TilesX < 24)
+                 //   {
+                   //     if (TilesX == 4 || TilesX == 9 || TilesX == 14 || TilesX == 19)
+                   //     {
 
-                        }
-                        else 
-                        {
-                            
-                           // Debug.Log(Tiles[TilesX + 1].gameObject.name);
-                        }
-                    }
+                   //     }
+                  //      else 
+                   //     {
+                     //       Debug.Log("why" + gameObject.name);
+                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name);
+                   //     }
+                  //  }
                 }
                 else if (TTile)
                 {
-                   if (TilesX< 20)
+                 
+                   if (TilesX > 0)
                    {
-                    
+                        Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX -1].gameObject.name + " from the right");
+                   
                    }
+                   if (TilesX < 24)
+                   {
+                     Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name + " from the left");
+                      
+                   }
+                    if (TilesX < 20)
+                    {
+                         Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5].gameObject.name + " from the bottom");
+              
+                    }
+                             //Debug.Log(Tiles[TilesX-1].gameObject.name + " " + Tiles[TilesX + 1].gameObject.name + " " +  Tiles[TilesX + 5].gameObject.name);
                 }
                 else if (ArmTile)
                 {
                     if (TilesX > 0)
                     {
-                        if (TilesX != 5 || TilesX != 10 || TilesX != 15 || TilesX != 20)
+                        if (TilesX == 5 || TilesX == 10 || TilesX == 15 || TilesX == 20)
                         {
 
                         }
                         else 
                         {
+                            ConnectingTiles.Add(Tiles[TilesX-1].gameObject);
+                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1].gameObject.name + " from the right");
                             
-                        Debug.Log(Tiles[TilesX - 1].gameObject.name);
                         }
                     }
                     if (TilesX < 20)
                     {
-                        Debug.Log(Tiles[TilesX + 5].gameObject.name);
+                        ConnectingTiles.Add(Tiles[TilesX + 5].gameObject);
+                        //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5].gameObject.name +  " from the top");
+                
                     }
+           
                 }
             }
             else if (RotateInt == 1)
             {
-                transform.eulerAngles= new Vector3(0, 0, 90);
+                Quaternion newRotation = new Quaternion(0, 0, 90,1 );
+               // transform.eulerAngles= new Vector3(0, 0, 90);
+                transform.rotation = newRotation;
+           
+                if (transform.rotation.z < 0)
+                {
+                    transform.rotation = new Quaternion(0, 0, transform.rotation.z * -1, 1);
+                }
                 if (StraightTile)
                 { 
                     if (TilesX > 4)
                     {
                         
-                       // Debug.Log(Tiles[TilesX - 5].gameObject.name);
                     }
                     if (TilesX < 20)
                     {
                         
-                    //Debug.Log(Tiles[TilesX + 5].gameObject.name);
-                    }
-                }
-                else if (ArmTile)
-                {
-                    if (TilesX < 20)
-                    {
-                        Debug.Log(Tiles[TilesX + 5].gameObject.name);
-                    }
-                    if (TilesX != 4 || TilesX != 9 || TilesX != 14 || TilesX != 19)
-                    {
-
-                    }
-                    else 
-                    {
-                            
-                        Debug.Log(Tiles[TilesX + 1].gameObject.name);
-                    }
-                }
-            }
-            else if (RotateInt == 2)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 180);
-                if (StraightTile)
-                {
-                     if (TilesX > 0)
-                    {
-                        if (TilesX != 5 || TilesX != 10 || TilesX != 15 || TilesX != 20)
-                        {
-
-                        }
-                        else 
-                        {
-                            
-                        //Debug.Log(Tiles[TilesX - 1].gameObject.name);
-                        }
-                    }
-                    if (TilesX < 24)
-                    {
-                        if (TilesX != 4 || TilesX != 9 || TilesX != 14 || TilesX != 19)
-                        {
-
-                        }
-                        else 
-                        {
-                            
-                            //Debug.Log(Tiles[TilesX + 1].gameObject.name);
-                        }
                     }
                 }
                 else if (TTile)
                 {
-
+                    //if (TilesX > 4)
+                    //{
+                      //  Debug.Log(gameObject.name + " " + Tiles[TilesX -5].gameObject.name + " from the bottom");
+                    
+                  //  }
+                    if (TilesX <24)
+                    {
+                         Debug.Log(gameObject.name + " " + Tiles[TilesX + 1].gameObject.name + " from the left");
+                  
+                    }
+                   
+                    if (TilesX > 4)
+                    {
+                        Debug.Log(gameObject.name + " " + Tiles[TilesX - 5].gameObject.name + " from the bottom");
+                 
+                    }
+                    
+                     // Debug.Log(Tiles[TilesX-5].gameObject.name + " " + Tiles[TilesX + 5].gameObject.name + " " +  Tiles[TilesX + 1].gameObject.name);
+            
                 }
                 else if (ArmTile)
                 {
-                    if (TilesX > 5)
+                    
+                    if (TilesX < 20)
                     {
+                        if (TilesX == 9 || TilesX == 14 || TilesX == 19 || TilesX == 24)
+                        {
+
+                        }
+                        else 
+                        {
+                            ConnectingTiles.Add(Tiles[TilesX +1].gameObject);
+                            // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].name + " from the left");
+                
+                        }
+                    }
+                    if (TilesX > 4)
+                    {
+                        ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
+                       // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].name + " from the bottom");
+                    }
+                    
+                
+                    
+                   
+                    
+                    
+                }
+            }
+            else if (RotateInt == 2)
+            {
+                Quaternion newRotation = new Quaternion(0,0, 180, 1);
+               // transform.eulerAngles = new Vector3(0, 0, 180);
+                transform.rotation = newRotation;
+                if (transform.rotation.z < 0)
+                {
+                    transform.rotation = new Quaternion(0, 0, transform.rotation.z * -1, 1);
+                }
+         
+                if (StraightTile)
+                {
+                   // if (TilesX > 0)
+                   // {
+                      //  if (TilesX == 5 || TilesX == 10 || TilesX == 15 || TilesX == 20)
+                       // {
+
+                       // }
+                        //else 
+                       // {
+                            Debug.Log("why 180" + gameObject.name);
+                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX-1].gameObject.name);
+                     //   }
+                  //  }
+                    
+                  //  if (TilesX < 24)
+                   // {
+                     //   if (TilesX == 4 || TilesX == 9 || TilesX == 14 || TilesX == 19)
+                      //  {
+
+                     //   }
+                     //   else 
+                     //   {
+                       //     Debug.Log("why 180" + gameObject.name);
+                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name);
+                     //   }
+                   // }
+                }
+                else if (TTile)
+                {
+                    if (TilesX > 0)
+                    {
+                        if (TilesX == 5 || TilesX == 10 || TilesX == 15 || TilesX == 20)
+                        {
+                            
+                        }
+                        else
+                        {
+                            Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1].gameObject.name + " from the right");
+                   
+                        }
                         
-                        Debug.Log(Tiles[TilesX - 5].gameObject.name);
                     }
-                    if (TilesX != 4 || TilesX != 9 || TilesX != 14 || TilesX != 19 || TilesX != 24)
+                    if (TilesX < 24)
                     {
-                        Debug.Log(Tiles[TilesX + 1].gameObject.name);
+                        if (TilesX == 9 || TilesX == 14 || TilesX == 19 || TilesX == 24)
+                        {
+
+                        }
+                        else 
+                        {
+                             Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name + " from the left");
+                   
+                        }
+                       
                     }
+                    if (TilesX > 4)
+                    {
+                         Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].gameObject.name + " from the bottom");
+
+                    }
+                   
+                  
+                    //  Debug.Log(Tiles[TilesX-1].gameObject.name + " " + Tiles[TilesX + 1].gameObject.name + " " +  Tiles[TilesX - 5].gameObject.name);
+            
+                }
+                else if (ArmTile)
+                {
+                    if (TilesX > 4)
+                    {
+                       
+                            ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
+                           //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].name + " from the bottom");
+                     
+                        
+                    }
+                    if (TilesX < 24)
+                    {
+                        if (TilesX == 9 || TilesX == 14 || TilesX == 19 || TilesX == 24)
+                        {
+                            
+                            }
+                        else 
+                        {
+                            //ConnectedTiles.Add(gameObject);
+                            ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
+                           //  Debug.Log(gameObject.name + "is connected to " + Tiles[TilesX + 1].gameObject.name + "from the left");
+                       
+                        }
+                    }
+                 
+                  
                     
                 }
             }
             else if (RotateInt == 3)
             {
-                transform.eulerAngles=new Vector3(0, 0, 270);
+                Quaternion newRotation = new Quaternion(0, 0, 270, 1);
+               // transform.eulerAngles=new Vector3(0, 0, 270);
+               
+                transform.rotation = newRotation;
+                if (transform.rotation.z < 0)
+                {
+                    transform.rotation = new Quaternion(0, 0, transform.rotation.z * -1, 1);
+                }
+              
                 if (StraightTile)
                 { 
                     if (TilesX > 4)
                     {
-                        //Debug.Log(Tiles[TilesX - 5].gameObject.name);
                     }
                     if (TilesX < 20)
                     {
                         
-                    //Debug.Log(Tiles[TilesX + 5].gameObject.name);
                     }
+                }
+                else if (TTile)
+                {
+                    if (TilesX < 20)
+                    {
+                        Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].gameObject.name + " from the top");
+           
+                    }
+                    //if (TilesX > 4)
+                    //{
+                      //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5].gameObject.name + " from the bottom");
+                   // }
+                    if (TilesX <24)
+                    {
+                        Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name + " from the left");
+                    }
+                    if (TilesX > 0)
+                    {
+                        Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1].gameObject.name + " from the right");
+                    }
+                      //Debug.Log(Tiles[TilesX-1].gameObject.name + " " +  Tiles[TilesX + 5].gameObject.name + " " + Tiles[TilesX - 5].gameObject.name);
+            
                 }
                 else if (ArmTile)
                 {
-                    if (TilesX > 4)
+                    if(TilesX > 4)
                     {
-                        Debug.Log(Tiles[TilesX - 5].gameObject.name);
+                     
+                       ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
+                          //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].name + " from the bottom");
+                       
+                    }
+                    if (TilesX < 24)
+                    {
+                        if (TilesX == 4 || TilesX == 9 || TilesX == 14 || TilesX == 19 )
+                        {
+                            
+                         }
+                        else 
+                        {
+                            ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
+                           //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].name + " from the left");
+                      
+                        }
+                    }
                     
-                    }
-                    if (TilesX != 5 || TilesX != 10 || TilesX != 15|| TilesX !=20)
-                    {
-                        Debug.Log(Tiles[TilesX - 1].gameObject.name);
-                    }
+                    
                 }
             }   
         }
