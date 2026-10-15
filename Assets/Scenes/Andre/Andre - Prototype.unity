@@ -1943,6 +1943,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6350127362679631415, guid: c2f16d0e06c40f0458a1ccccda2d9524, type: 3}
+      propertyPath: TTile
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350127362679631415, guid: c2f16d0e06c40f0458a1ccccda2d9524, type: 3}
       propertyPath: TilesX
       value: 5
       objectReference: {fileID: 0}

@@ -219,6 +219,7 @@ public class PipePuzzleTile : MonoBehaviour
                         }
                         else
                         {
+                            Debug.Log("what");
                             Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1].gameObject.name + " from the right");
                    
                         }
@@ -230,8 +231,9 @@ public class PipePuzzleTile : MonoBehaviour
                         {
 
                         }
-                        else 
+                        else
                         {
+                            Debug.Log("what");
                              Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1].gameObject.name + " from the left");
                    
                         }
@@ -299,7 +301,7 @@ public class PipePuzzleTile : MonoBehaviour
                 }
                 else if (TTile)
                 {
-                    if (TilesX < 20)
+                    if (TilesX > 4)
                     {
                         Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5].gameObject.name + " from the top");
            
