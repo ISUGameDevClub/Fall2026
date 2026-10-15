@@ -1,11 +1,12 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
+
 {
-    public Checkpoint CurrentCheckpoint;
+    public GameObject CurrentCheckpoint;
+    Transform respawnpoint;
      
-    public void SetCheckpoint(Checkpoint cp)
+    public void SetCheckpoint(GameObject cp)
     {
         CurrentCheckpoint = cp;
     }
@@ -14,13 +15,30 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (CurrentCheckpoint != null)
         {
-            transform.position = Checkpoint.respawnPosition;
+            transform.position = respawnpoint.position;
+            
+
+
+        }
+    }
+     
+    void OnTriggerEnter2D(Collider2D collision)
+{
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
+        if (collision.CompareTag("Checkpoint"))
+        {
+            Debug.Log("Checkpoint reached!");
+            respawnpoint = collision.transform;
+            CurrentCheckpoint = collision.gameObject;
+
+
+        }
+        else if (collision.CompareTag("DeathZone"))
+        {
+            Debug.Log("died");
+            Respawn();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

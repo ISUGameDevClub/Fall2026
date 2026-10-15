@@ -359,7 +359,7 @@ Transform:
   m_GameObject: {fileID: 2015265031}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: 0.372, z: 0}
+  m_LocalPosition: {x: 0.188, y: 0.313, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -405,15 +405,73 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.7408651, y: 1.543245, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &5256748890126584226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.68503
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03346
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123765404795757893, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869103193213456177, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
+      propertyPath: m_Name
+      value: RespawnPoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f01f07429fa82a459469066a5463d98, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 772762862}
   - {fileID: 2015265033}
+  - {fileID: 5256748890126584226}

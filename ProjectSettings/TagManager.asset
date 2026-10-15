@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Hook
+  - Checkpoint
+  - PlayerRespawn
+  - DeathZone
   layers:
   - Default
   - TransparentFX
