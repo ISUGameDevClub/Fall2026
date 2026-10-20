@@ -7,14 +7,16 @@ public class PipePuzzleTile : MonoBehaviour
     public bool watered;
     public List<GameObject> ConnectingTiles = new List<GameObject>();
     public bool EndTile;
+    public bool EndSolutionTile;
     public bool StraightTile, TTile, ArmTile, solutionTile;
     public List<GameObject> Tiles = new List<GameObject>();
-    // public bool TileChild;
     public GameObject Child;
     //
     public int TilesX;
     public int EndTileRotateX;
     public int manualRotationInt;
+    public int lastRotatInt;
+
     //EndTileRotateX  0 = no rotation
     //EndTileRotateX 1 = 90 degrees 
     //EndTileRotateX 2 = 180 degrees
@@ -24,20 +26,36 @@ public class PipePuzzleTile : MonoBehaviour
     {
 
     }
+    //Check if the one of the connected tiles are watered, water the next connected tile
     public void CheckWater()
     {
-        for(int i = 0; i < ConnectingTiles.Count; i++)
+        foreach (GameObject Tiles in ConnectingTiles)
         {
-            if (ConnectingTiles[i].GetComponent<PipePuzzleTile>().ConnectingTiles.Contains(gameObject))
+            if (Tiles.GetComponent<PipePuzzleTile>().ConnectingTiles.Contains(gameObject))
             {
-                Debug.Log(gameObject + " is connected to " + ConnectingTiles[i].gameObject.name + " fully");
-                if (ConnectingTiles[i].gameObject.GetComponent<PipePuzzleTile>().watered)
+                if (Tiles.GetComponent<PipePuzzleTile>().watered)
                 {
                     watered = true;
                 }
             }
         }
+        foreach (GameObject Tile in ConnectingTiles)
+        {
+            if (Tile.GetComponent<PipePuzzleTile>().ConnectingTiles.Contains(gameObject))
+            {
+                if (watered)
+                {
+                    Tile.GetComponent<PipePuzzleTile>().watered = true;
+                }
+            }
+        }
+        if (ConnectingTiles.Count == 0)
+        {
+            watered = false;
+        }
+
     }
+
     public void CheckEndTile()
     {
         if (EndTileRotateX == 0)
@@ -68,16 +86,19 @@ public class PipePuzzleTile : MonoBehaviour
                 ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
             }
         }
-        
+
     }
     public void SetTile(int RotateInt, bool manual)
     {
-        //int RotateInt = Random.Range(0, 4);
+        if (!manual)
+        {
+
+            manualRotationInt = RotateInt;
+        }
         if (!EndTile)
         {
             if (RotateInt == 0)
             {
-                manualRotationInt = RotateInt;
                 if (StraightTile)
                 {
                     if (TilesX > 0)
@@ -114,7 +135,6 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
-                            // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1] + " from the right");
                         }
                     }
                     if (TilesX < 24)
@@ -126,13 +146,11 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
-                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1] + " from the left");
                         }
                     }
                     if (TilesX < 20)
                     {
                         ConnectingTiles.Add(Tiles[TilesX + 5].gameObject);
-                        //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5] + " from the up");
                     }
 
                 }
@@ -157,39 +175,20 @@ public class PipePuzzleTile : MonoBehaviour
                     }
 
                 }
-                //  }
             }
             else if (RotateInt == 1)
             {
-                // if (EndTile)
-                //{
-                //  if (TilesX < 24)
-                //  {
-                //     ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
-
-                //   }
-
-                //  }
-                //  else
-                // {
                 Quaternion newRotation = new Quaternion(0, 0, 90, 1);
-                // transform.eulerAngles= new Vector3(0, 0, 90);
-                // transform.rotation = newRotation;
                 if (manual)
                 {
 
                 }
                 else
                 {
-                    
-                transform.Rotate(0, 0, 90);
+
+                    transform.Rotate(0, 0, 90);
                 }
                 manualRotationInt = RotateInt;
-                //Debug.Log(gameObject.name + " should be rotated 90 degrees");
-                //if (transform.rotation.z < 0)
-                //{
-                //  transform.rotation = new Quaternion(0, 0, transform.rotation.z * -1, 1);
-                // }
                 if (StraightTile)
                 {
                     if (TilesX > 4)
@@ -213,23 +212,17 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
-                            //Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1] + " from the left");
                         }
-                        // ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
                     }
 
                     if (TilesX > 4)
                     {
                         ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
-                        // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5] + " from the bottom");
                     }
                     if (TilesX < 20)
                     {
                         ConnectingTiles.Add(Tiles[TilesX + 5].gameObject);
-                        // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5]  + " from the top");
                     }
-
-
                 }
                 else if (ArmTile)
                 {
@@ -274,16 +267,13 @@ public class PipePuzzleTile : MonoBehaviour
                 // else
                 //  {
                 Quaternion newRotation = new Quaternion(0, 0, 180, 1);
-                // transform.eulerAngles = new Vector3(0, 0, 180);
-                //transform.rotation = newRotation;
                 if (manual)
                 {
 
                 }
                 else
                 {
-                transform.Rotate(0, 0, 180);
-                    
+                    transform.Rotate(0, 0, 180);
                 }
                 manualRotationInt = RotateInt;
                 if (StraightTile)
@@ -322,7 +312,6 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
-                            // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1] + " from the right");
                         }
                     }
                     if (TilesX < 24)
@@ -334,13 +323,11 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
-                            // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 1] + " from the left");
                         }
                     }
                     if (TilesX > 4)
                     {
                         ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
-                        //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5] + " from the bottom");
                     }
                 }
                 else if (ArmTile)
@@ -361,45 +348,20 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX + 1].gameObject);
-
                         }
                     }
-
-
-
                 }
-
-                //   }
-
             }
             else if (RotateInt == 3)
             {
-
-                //transform.rotation = newRotation;
-                //if (transform.rotation.z < 0)
-                //{
-                //   transform.rotation = new Quaternion(0, 0, transform.rotation.z * -1, 1);
-                // }
-                //  Debug.Log(gameObject.name + " should be rotated 270");
-                // if (EndTile)
-                // {
-                //     if (TilesX > 0)
-                //     {
-                //        ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
-                //      }
-                //  }
-                // else
-                //  {
                 Quaternion newRotation = new Quaternion(0, 0, 270, 1);
-                // transform.eulerAngles=new Vector3(0, 0, 270);
                 if (manual)
                 {
 
                 }
                 else
                 {
-                    
-                transform.Rotate(0, 0, 270);
+                    transform.Rotate(0, 0, 270);
                 }
                 manualRotationInt = RotateInt;
                 if (StraightTile)
@@ -424,20 +386,16 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
-                            //  Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 1] + " from the right");
                         }
-                        // ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
                     }
 
                     if (TilesX > 4)
                     {
                         ConnectingTiles.Add(Tiles[TilesX - 5].gameObject);
-                        // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX - 5] + " from the bottom");
                     }
                     if (TilesX < 20)
                     {
                         ConnectingTiles.Add(Tiles[TilesX + 5].gameObject);
-                        // Debug.Log(gameObject.name + " is connected to " + Tiles[TilesX + 5]  + " from the top");
                     }
                 }
                 else if (ArmTile)
@@ -458,66 +416,75 @@ public class PipePuzzleTile : MonoBehaviour
                         else
                         {
                             ConnectingTiles.Add(Tiles[TilesX - 1].gameObject);
-
                         }
                     }
-
-
                 }
-
-                //  }
             }
-            //  }
-            //Put the following on the rotate code 
-           /* for (int i = 0; i < ConnectingTiles.Count; i++)
-            {
-                if (ConnectingTiles[i].GetComponent<PipePuzzleTile>().ConnectingTiles.Contains(gameObject))
-                {
-                    Debug.Log(gameObject.name + " is connected to " + ConnectingTiles[i].name + " fully.");
-                    if (ConnectingTiles[i].GetComponent<PipePuzzleTile>().watered)
-                    {
-                        watered = true;
-                        //put the code for the water animation here
-                    }
-                }
-            }*/
-
         }
     }
     public void Rotate()
     {
         if (!EndTile)
         {
-            Debug.Log(manualRotationInt);
+            //clear and set tile 0 of all surrounding connecting tiles before clearing 
+            //set tile of the current tile and all surrounding tiles
+            foreach (GameObject tile in ConnectingTiles)
+            {
+                tile.GetComponent<PipePuzzleTile>().ConnectingTiles.Clear();
+            }
+            ConnectingTiles.Clear();
+            watered = false;
+            transform.Rotate(0, 0, 180 / 2, Space.Self);
             if (manualRotationInt < 3)
             {
                 manualRotationInt++;
-                ConnectingTiles.Clear();
                 SetTile(manualRotationInt, true);
-                //transform.Rotate(0, 0, -90);
             }
-            if (manualRotationInt == 3)
+            else if (manualRotationInt == 3)
             {
                 manualRotationInt = 0;
-                ConnectingTiles.Clear();
                 SetTile(manualRotationInt, true);
-                //transform.Rotate(0, 0, -90);
             }
-            transform.Rotate(0, 0, 180/2, Space.Self);
-            //transform.Rotate(0, 0, 180,Space.Self);
-            //SetTile();
-            //for some reason, putting (transform.rotation = Quaternion.Euler(0, 0, (transform.rotation.z + 90))) doesnt work
+            foreach (GameObject why in ConnectingTiles)
+            //check do the setTile of the original 
+            {
+                if (why.GetComponent<PipePuzzleTile>().EndTile)
+                {
+                    why.GetComponent<PipePuzzleTile>().CheckEndTile();
+
+                }
+                else
+                {
+                    why.GetComponent<PipePuzzleTile>().SetTile(why.GetComponent<PipePuzzleTile>().manualRotationInt, true);
+
+                }
+                why.GetComponent<PipePuzzleTile>().CheckWater();
+            }
+            CheckWater();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //  if (watered)
-        // {
+        if (watered)
+        {
 
-        //   Child.GetComponent<Image>().fillAmount+=.10f;
-        //  }
+            Child.GetComponent<Image>().fillAmount += .10f;
+            if (EndSolutionTile)
+            {
+                if (!transform.parent.gameObject.GetComponent<PipePuzzleManager>().PuzzleSolved)
+                {
+                    transform.parent.gameObject.GetComponent<PipePuzzleManager>().PuzzleSolved = true;
+
+                    Debug.Log("Puzzle Solved");
+                }
+            }
+        }
+        else
+        {
+            Child.GetComponent<Image>().fillAmount = 0;
+        }
 
     }
 }
