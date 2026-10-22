@@ -84,6 +84,5 @@ public class SwingController : MonoBehaviour
 
     public float getMaxHookDistance() { return maxHookDistance; }
 
-    public GameObject getNearestHook() { return FindNearestHook(); }
-    //change to bool
+    public bool isNearHook() { return null != FindNearestHook(); }
 }
