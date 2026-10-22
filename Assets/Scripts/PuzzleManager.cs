@@ -15,6 +15,9 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private string puzzleActionMap;
     [SerializeField] private bool pauseGameplay = true;
 
+    [Header("Pipes")]
+    [SerializeField] private GameObject[] PipePuzzlePrefabs;
+    
     private float previousTimeScale = 1f;
     private string previousActionMap;
 
@@ -100,6 +103,16 @@ public class PuzzleManager : MonoBehaviour
         else
         {
             OpenPuzzle();
+        }
+    }
+    public void SpawnPipePuzzle()
+    {
+        int PuzzlePrefab = Random.Range(0, 4);
+        switch (PuzzlePrefab)
+        {
+            case 0:
+                GameObject Pipe1 = Instantiate (PipePuzzlePrefabs[PuzzlePrefab], gameObject.transform);
+                break;
         }
     }
 }
