@@ -93,7 +93,7 @@ public class BreadCrumbBehavior : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll)
     {
         Debug.Log("Destroy gameobject");
-        if (coll.gameObject.CompareTag("Player") && collectable)
+        if ((coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Pigeon")) && collectable)
         {
             coll.gameObject.GetComponent<PlayerController>().BreadCrumbAmount--;
             Destroy(gameObject);

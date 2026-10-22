@@ -34,6 +34,14 @@ public class PlayerController : MonoBehaviour
     public float range;
     [SerializeField] GameObject RangeCircle;
 
+    // Pigeon stuff
+    private PigeonManager pigeon;
+    /*
+     Odin notes understanding the above. 
+    PigeonManager: The script name. 
+    pigeon: Name of variable in which storing data from PigeonManager. 
+     */
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -54,7 +62,12 @@ public class PlayerController : MonoBehaviour
         Throw.performed += ctx => ThrowObject();
         ableToMove = true;
         aiming = false;
+
+        pigeon = GameObject.FindGameObjectWithTag("Pigeon").GetComponent<PigeonManager>();
         //walkSpeed = speed;
+
+        
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -91,9 +104,16 @@ public class PlayerController : MonoBehaviour
             BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
             BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
             BCGO.GetComponent<BreadCrumbBehavior>().thrown = false;
-            
+
+            Debug.Log("Spawned Breadcrumb: " + BCGO);
             BreadCrumbAmount++;
+            pigeon.SpawnedBreadcrumb(BCGO);
+            // ^Tracking breadcrumb spawns to send to pigeon60.cs
+            // Using pigeon instead of Pigeon60 because it is the name of the variable we store data in.^
         }
+
+
+
 
     }
     void ThrowObject()
@@ -113,7 +133,17 @@ public class PlayerController : MonoBehaviour
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
         }
     }
+    /*
+     --- Pigeon Ability for Crumb Collection --- Odin
+     */
 
+    // 1st - Code to call PigeonScript --> Pigeon60.cs
+    // ^ Calls the function of Pigeon60.CS 
+    // Would the instance be attached to the player or input system?
+
+    /*
+     --- End of Pigeon Ability for Crumb Collection --- Odin
+     */
     private void FixedUpdate()
     {
         if (ableToMove)
