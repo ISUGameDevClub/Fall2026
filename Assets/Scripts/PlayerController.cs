@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos;
     public bool aiming;
     private InputAction Aim;
+    public bool facingRight;
 
     //private bool jumpRequested;
     [Header("Player Consumables")]
@@ -64,6 +65,10 @@ public class PlayerController : MonoBehaviour
 
 
             moveInput = context.ReadValue<Vector2>();
+
+            // Update which direction player is facing
+            if (moveInput.x > 0) facingRight = true;
+            else if (moveInput.x < 0) facingRight = false;
         }
     }
 
@@ -203,5 +208,10 @@ public class PlayerController : MonoBehaviour
         //{
           //  grounded = false;
        // }
+    }
+
+    public bool IsFacingRight()
+    {
+        return facingRight;
     }
 }
