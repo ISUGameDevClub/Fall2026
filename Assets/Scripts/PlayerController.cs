@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         //{
         //Debug.Log(Coll.gameObject.name);
         //            Debug.Log("Have touched floor");
-        if (Coll.gameObject.CompareTag("Floor"))
+        if (Coll.gameObject.CompareTag("Floor")|| Coll.gameObject.CompareTag("Grate"))
         {
             //Debug.Log(jumpCount);
             jumpCount = 0;

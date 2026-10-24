@@ -99,8 +99,9 @@ public class BreadCrumbBehavior : MonoBehaviour
         }
         if (coll.gameObject.CompareTag("Floor"))
         {
-            GetComponent<Rigidbody2D>().gravityScale = 0;
-            Debug.Log("gravity froze");
+            GetComponent<Rigidbody2D>().gravityScale = 0; //only setting gravity to 0 still allowed them to fall for some reason
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            GetComponent<Rigidbody2D>().constraints &= ~RigidbodyConstraints2D.FreezePositionY;// its a bandaid fix but it works well enough
         }
         
         //if (coll.gameObject.CompareTag("Floor") && thrown)
