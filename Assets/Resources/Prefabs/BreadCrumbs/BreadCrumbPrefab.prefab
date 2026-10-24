@@ -150,7 +150,6 @@ MonoBehaviour:
   parent: {fileID: 0}
   target: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
-  thing: 0.9
 --- !u!50 &8890046722194673152
 Rigidbody2D:
   serializedVersion: 5

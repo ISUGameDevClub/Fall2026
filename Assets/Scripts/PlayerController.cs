@@ -82,9 +82,6 @@ public class PlayerController : MonoBehaviour
     }
     void Plant()
     {
-
-
-        //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
             //BCGO is instantiated Breadcrumbs gameobject 
@@ -92,7 +89,7 @@ public class PlayerController : MonoBehaviour
             BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
             BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
             BCGO.GetComponent<BreadCrumbBehavior>().thrown = false;
-            
+
             BreadCrumbAmount++;
         }
 

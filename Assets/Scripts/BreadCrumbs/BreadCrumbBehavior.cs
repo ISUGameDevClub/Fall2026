@@ -32,7 +32,7 @@ public class BreadCrumbBehavior : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody2D>().gravityScale = 0;
+            //GetComponent<Rigidbody2D>().gravityScale = 0;
         }
         //thrown = true;
         //Object = gameObject.transform;
@@ -70,7 +70,6 @@ public class BreadCrumbBehavior : MonoBehaviour
             if (hitDown.collider.gameObject.CompareTag("Floor"))
             {
                 //collectable = true;
-                GetComponent<Rigidbody2D>().gravityScale = 0;
                 collectable = true;
                 //thrown = false;
                 //Debug.Log("Distance between floor and me is " + Mathf.Abs(transform.position.y - hitDown.collider.gameObject.transform.position.y));
@@ -98,14 +97,20 @@ public class BreadCrumbBehavior : MonoBehaviour
             coll.gameObject.GetComponent<PlayerController>().BreadCrumbAmount--;
             Destroy(gameObject);
         }
+        if (coll.gameObject.CompareTag("Floor"))
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+            Debug.Log("gravity froze");
+        }
+        
         //if (coll.gameObject.CompareTag("Floor") && thrown)
         //{
 
-            //collectable = true;
-          //  Debug.Log("Where is the floor");
-          //  Debug.Log(coll.transform.position);
-            //gameObject.GetComponent<CapsuleCollider2D>().isTrigger = false;
-            //GORB2D.linearVelocity = new Vector2(0, 0);
+        //collectable = true;
+        //  Debug.Log("Where is the floor");
+        //  Debug.Log(coll.transform.position);
+        //gameObject.GetComponent<CapsuleCollider2D>().isTrigger = false;
+        //GORB2D.linearVelocity = new Vector2(0, 0);
         //}
     }
     void OnTriggerExit2D(Collider2D coll)
