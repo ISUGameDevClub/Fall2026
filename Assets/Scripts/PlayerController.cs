@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     //private float walkSpeed;
     [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float coyoteTime = 0.1f;
     private int jumpCount = 0;
     private int jumpLimit = 2;
-    private bool grounded = true;
+    private bool grounded;
+    private float coyoteTimeCounter;
+    private readonly HashSet<Collider2D> groundColliders = new HashSet<Collider2D>();
 
     private Rigidbody2D body;
     private Vector2 moveInput;
@@ -122,23 +126,29 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (grounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter = Mathf.Max(0f, coyoteTimeCounter - Time.fixedDeltaTime);
+        }
+
         if (ableToMove)
         {
             body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
 
-            if (jumpRequested && (jumpCount < jumpLimit))
+            bool canGroundJump = jumpCount == 0 && (grounded || coyoteTimeCounter > 0f);
+            bool canDoubleJump = jumpCount == 1 && jumpLimit > 1;
+            if (jumpRequested && (canGroundJump || canDoubleJump))
             {
                 body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
                 jumpCount++;
-
-                //body.linearVelocity = new Vector2(body.linearVelocity.x, jumpHeight);
-                jumpRequested = false;
-
+                coyoteTimeCounter = 0f;
             }
-            if (jumpRequested && (jumpCount >= jumpLimit))
-            {
-                jumpRequested = false;
-            }
+
+            jumpRequested = false;
         }
         else if (aiming)
         {
@@ -187,30 +197,21 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D Coll)
     {
-        //if (Coll.gameObject.name == "Floor")
-        //{
-        //Debug.Log(Coll.gameObject.name);
-        //            Debug.Log("Have touched floor");
         if (Coll.gameObject.CompareTag("Floor"))
         {
-            //Debug.Log(jumpCount);
-            jumpCount = 0;
+            groundColliders.Add(Coll.collider);
             grounded = true;
+            jumpCount = 0;
         }
-        //Put below into "ontriggerEnter for 
-        /*if (Coll.gameObject.name.Contains("Test"))
-        {
-            Debug.Log(GetComponent<PlayerInput>().currentActionMap.name);
-            Debug.Log("This should show the interact message.");
-        }*/
-        //}
     }
+
     void OnCollisionExit2D(Collision2D coll)
     {
-       // if (coll.gameObject.name == "Floor")
-        //{
-          //  grounded = false;
-       // }
+        if (coll.gameObject.CompareTag("Floor"))
+        {
+            groundColliders.Remove(coll.collider);
+            grounded = groundColliders.Count > 0;
+        }
     }
 
     public bool IsFacingRight()
