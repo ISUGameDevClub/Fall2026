@@ -458,9 +458,8 @@ public class PipePuzzleTile : MonoBehaviour
                     why.GetComponent<PipePuzzleTile>().SetTile(why.GetComponent<PipePuzzleTile>().manualRotationInt, true);
 
                 }
-                why.GetComponent<PipePuzzleTile>().CheckWater();
             }
-            CheckWater();
+            transform.parent.gameObject.GetComponent<PipePuzzleManager>().RecalculateWater();
         }
     }
 

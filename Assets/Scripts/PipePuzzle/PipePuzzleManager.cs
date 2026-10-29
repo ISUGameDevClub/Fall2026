@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PipePuzzleManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Tiles = new List<GameObject>();
+    private readonly List<PipePuzzleTile> waterSources = new List<PipePuzzleTile>();
     [SerializeField] private Sprite StraightSprite;
     [SerializeField] private Sprite TTileSprite;
     [SerializeField] private Sprite ArmTileSprite;
@@ -15,6 +16,15 @@ public class PipePuzzleManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        foreach (GameObject tile in Tiles)
+        {
+            PipePuzzleTile pipeTile = tile.GetComponent<PipePuzzleTile>();
+            if (pipeTile.watered)
+            {
+                waterSources.Add(pipeTile);
+            }
+        }
+
         for (int i = 0; i < Tiles.Count; i++)
         {
             for (int x = 0; x < Tiles.Count; x++)
@@ -84,11 +94,56 @@ public class PipePuzzleManager : MonoBehaviour
 
 
         }
-        foreach (GameObject Tile in Tiles)
+        RecalculateWater();
+    }
+
+    public void RecalculateWater()
+    {
+        foreach (GameObject tile in Tiles)
         {
-            Tile.GetComponent<PipePuzzleTile>().CheckWater();
+            tile.GetComponent<PipePuzzleTile>().ConnectingTiles.Clear();
+        }
+
+        foreach (GameObject tile in Tiles)
+        {
+            PipePuzzleTile pipeTile = tile.GetComponent<PipePuzzleTile>();
+            if (pipeTile.EndTile)
+            {
+                pipeTile.CheckEndTile();
+            }
+            else
+            {
+                pipeTile.SetTile(pipeTile.manualRotationInt, true);
+            }
+        }
+
+        foreach (GameObject tile in Tiles)
+        {
+            tile.GetComponent<PipePuzzleTile>().watered = false;
+        }
+
+        Queue<PipePuzzleTile> pendingTiles = new Queue<PipePuzzleTile>();
+        foreach (PipePuzzleTile source in waterSources)
+        {
+            source.watered = true;
+            pendingTiles.Enqueue(source);
+        }
+
+        while (pendingTiles.Count > 0)
+        {
+            PipePuzzleTile currentTile = pendingTiles.Dequeue();
+            foreach (GameObject connectedObject in currentTile.ConnectingTiles)
+            {
+                PipePuzzleTile connectedTile = connectedObject.GetComponent<PipePuzzleTile>();
+                if (!connectedTile.watered && connectedTile.ConnectingTiles.Contains(currentTile.gameObject))
+                {
+                    connectedTile.watered = true;
+                    pendingTiles.Enqueue(connectedTile);
+                }
+            }
         }
     }
+
     void Update()
     {
 
