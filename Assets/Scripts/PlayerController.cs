@@ -202,9 +202,24 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D coll)
     {
-       // if (coll.gameObject.name == "Floor")
-        //{
-          //  grounded = false;
-       // }
+       if (coll.gameObject.name == "Floor")
+       {
+         grounded = false;
+       }
+    }
+
+    public bool getGrounded()
+    {
+        return grounded;
+    }
+
+    public int getBreadcrumbs()
+    {
+        return BreadCrumbAmount;
+    }
+
+    public void setBreadcrumbs(int breadcrumbs)
+    {
+        BreadCrumbAmount = breadcrumbs;
     }
 }

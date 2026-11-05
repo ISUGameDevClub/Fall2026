@@ -7,12 +7,12 @@ TagManager:
   - Hook
   - Floor
   - PoisonObstacle
-
+  - WaterHazard
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
   - 
