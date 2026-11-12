@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private InputAction Throw;
     public static PlayerController instance;
     public float range;
+    Pause pause;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     //Yeah so the start function is because the "void OnPlant()" wasnt working for some reason
     void Start()
     {
+        pause = FindAnyObjectByType<Pause>();
         Application.targetFrameRate = 60;
         Drop = InputSystem.actions.FindAction("Player/Plant");
         Aim = InputSystem.actions.FindAction("Player/Aim");
@@ -126,6 +128,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (pause.isPaused())
+            return; //dont check for player input if paused
+
         if (grounded)
         {
             coyoteTimeCounter = coyoteTime;
