@@ -124,6 +124,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5248073846459094655, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
   m_PrefabInstance: {fileID: 4144088050444666334}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &371444140 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3856273958539371823, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
+  m_PrefabInstance: {fileID: 4144088050444666334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &447656178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3134465720726295320, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
+  m_PrefabInstance: {fileID: 4144088050444666334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &492999413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2698253092785296190, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
+  m_PrefabInstance: {fileID: 4144088050444666334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &649554906 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4169939816378654347, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
@@ -240,6 +261,8 @@ MonoBehaviour:
   openPuzzleButton: {fileID: 0}
   closeButton: {fileID: 0}
   confirmButton: {fileID: 0}
+  winPopupPanel: {fileID: 0}
+  continueButton: {fileID: 0}
   newspaperTiles: []
 --- !u!114 &908278495 stripped
 MonoBehaviour:
@@ -420,6 +443,8 @@ MonoBehaviour:
   openPuzzleButton: {fileID: 0}
   closeButton: {fileID: 0}
   confirmButton: {fileID: 0}
+  winPopupPanel: {fileID: 0}
+  continueButton: {fileID: 0}
   newspaperTiles: []
 --- !u!1 &1297211218 stripped
 GameObject:
@@ -431,6 +456,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1350910875299888546, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
   m_PrefabInstance: {fileID: 4144088050444666334}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1317453114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8905733644511811041, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
+  m_PrefabInstance: {fileID: 4144088050444666334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1344640823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2077266818427526064, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
@@ -481,7 +517,9 @@ MonoBehaviour:
   puzzleWindow: {fileID: 952110199}
   openPuzzleButton: {fileID: 908278495}
   closeButton: {fileID: 2143115943}
-  confirmButton: {fileID: 0}
+  confirmButton: {fileID: 1317453114}
+  winPopupPanel: {fileID: 447656178}
+  continueButton: {fileID: 492999413}
   newspaperTiles:
   - {fileID: 1919088659}
   - {fileID: 1018530051}
@@ -491,6 +529,7 @@ MonoBehaviour:
   - {fileID: 1405372977}
   - {fileID: 649554907}
   - {fileID: 771022622}
+  - {fileID: 371444140}
 --- !u!1 &1919088658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3176741652629641955, guid: 6245349a256ccd648aa8a5c231ec9e28, type: 3}
@@ -517,6 +556,8 @@ MonoBehaviour:
   openPuzzleButton: {fileID: 0}
   closeButton: {fileID: 0}
   confirmButton: {fileID: 0}
+  winPopupPanel: {fileID: 0}
+  continueButton: {fileID: 0}
   newspaperTiles: []
 --- !u!61 &1919088664
 BoxCollider2D:
