@@ -7,12 +7,12 @@ TagManager:
   - Hook
   - Floor
   - PoisonObstacle
-
+  - AnimalControl
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
   - 
@@ -21,7 +21,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - CameraZone
   - 
   - 
   - 

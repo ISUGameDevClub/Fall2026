@@ -1999,6 +1999,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6155008739217193146, guid: c2f16d0e06c40f0458a1ccccda2d9524, type: 3}
+      propertyPath: EndSolutionTile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155008739217193146, guid: c2f16d0e06c40f0458a1ccccda2d9524, type: 3}
       propertyPath: ConnectingTiles.Array.size
       value: 0
       objectReference: {fileID: 0}
