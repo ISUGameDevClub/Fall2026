@@ -1,3 +1,7 @@
+
+
+
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
@@ -37,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private InputAction Throw;
     public static PlayerController instance;
     public float range;
+
+    public bool inputDisabled; 
 
     private void Awake()
     {
@@ -91,7 +97,10 @@ public class PlayerController : MonoBehaviour
     }
     void Plant()
     {
-
+        if (inputDisabled)
+        {
+            return;
+        }
 
         //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
@@ -108,6 +117,10 @@ public class PlayerController : MonoBehaviour
     }
     void ThrowObject()
     {
+        if (inputDisabled)
+        {
+            return;
+        }
         if (aiming && (BreadCrumbAmount < BreadCrumbLimit))
         {
             GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -126,6 +139,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(inputDisabled)
+        {
+            return;
+        }
         if (grounded)
         {
             coyoteTimeCounter = coyoteTime;
@@ -218,4 +235,6 @@ public class PlayerController : MonoBehaviour
     {
         return facingRight;
     }
+
+
 }
