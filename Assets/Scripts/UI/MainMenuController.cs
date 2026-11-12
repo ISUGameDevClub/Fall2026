@@ -10,6 +10,20 @@ public class MainMenuController : MonoBehaviour
 
     public void goToStart()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene("Lvl.1 Alley");
+    }
+
+    public void goToSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
