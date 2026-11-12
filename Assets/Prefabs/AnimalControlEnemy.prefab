@@ -184,7 +184,7 @@ MonoBehaviour:
   wallCheckDistance: 0.6
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   ledgeCheckForwardDistance: 0.1
   ledgeCheckDistance: 0.4
   detectionRadius: 5
