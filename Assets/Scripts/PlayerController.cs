@@ -96,8 +96,6 @@ public class PlayerController : MonoBehaviour
     }
     void Plant()
     {
-
-
         //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
@@ -111,31 +109,26 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    private IEnumerator coroutine;
     void ThrowObject()
     {
         if (aiming && (BreadCrumbAmount < BreadCrumbLimit))
         {
             animator.SetBool("Throwing", true);
-            coroutine = WaitForAnim(1f);//magic number, just what matchest the closest from testing
-            StartCoroutine(coroutine);// using a coroutine here to delay the throw to match up with the animation
+            GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            BreadCrumbAmount++;
+            //BCGO.GetComponent<BreadCrumbBehavior>().CurrentPosition = new Vector2(mousePos.x, mousePos.y);
+            //BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
+            BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
+            BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
+            BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
+            //BCGO.GetComponent<BreadCrumbBehavior>().mousePos = new Vector2(mousePos.x, mousePos.y);
+            //BCGO.GetComponent<Rigidbody2D>().AddForce(Vector2.one * 250);
+            //BCGO.GetComponent<BreadCrumbBehavior>().thrownRight = true;
+            //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
         }
     }
-    IEnumerator WaitForAnim(float waitTime)
+    public void FinishThrowing()
     {
-        //Debug.Log("waited");
-        yield return new WaitForSeconds(waitTime);
-        GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        BreadCrumbAmount++;
-        //BCGO.GetComponent<BreadCrumbBehavior>().CurrentPosition = new Vector2(mousePos.x, mousePos.y);
-        //BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
-        BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
-        BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
-        BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
-        //BCGO.GetComponent<BreadCrumbBehavior>().mousePos = new Vector2(mousePos.x, mousePos.y);
-        //BCGO.GetComponent<Rigidbody2D>().AddForce(Vector2.one * 250);
-        //BCGO.GetComponent<BreadCrumbBehavior>().thrownRight = true;
-        //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
         animator.SetBool("Throwing", false);
     }
     private void FixedUpdate()
@@ -203,19 +196,22 @@ public class PlayerController : MonoBehaviour
             if (Vector2.Distance(transform.position, mousePos) < range)
             {
                 Reticle.transform.position = mousePos;
-            if (mousePos.y > transform.position.y)
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else if (mousePos.y < transform.position.y)
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            }
+                if (mousePos.x > transform.position.x)
+                {
+                    spriteRenderer.flipX = false;
+                    facingRight = true;
+                }
+                else if (mousePos.x < transform.position.x)
+                {
+                    spriteRenderer.flipX = true;
+                    facingRight = false;
+                }
             }
         }
     }
     void StartAim()
     {
+        animator.SetBool("Aiming", true);
         ableToMove = false;
         aiming = true;
         Reticle.SetActive(true);
@@ -228,6 +224,7 @@ public class PlayerController : MonoBehaviour
     }
     void EndAim()
     {
+        animator.SetBool("Aiming", false);
         ableToMove = true;
         aiming = false;
         Reticle.SetActive(false);
