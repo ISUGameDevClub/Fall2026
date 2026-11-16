@@ -1,0 +1,121 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
+
+public class WhackARatManager : MonoBehaviour
+{
+    [Header("Modal UI")]
+    [SerializeField] private GameObject puzzlePanel;
+    [SerializeField] private GameObject openPuzzleButton;
+    [SerializeField] private Selectable firstSelected;
+
+    [Header("Gameplay")]
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private string puzzleActionMap;
+    [SerializeField] private bool pauseGameplay = true;
+
+    [Header("Whack-A-Rat")]
+    [SerializeField] private GameObject scoreText;
+
+    private float previousTimeScale = 1f;
+    private string previousActionMap;
+
+    public bool IsOpen => puzzlePanel != null && puzzlePanel.activeSelf;
+
+    private int score = 0;
+
+    private void Awake()
+    {
+        if (puzzlePanel != null)
+        {
+            puzzlePanel.SetActive(false);
+        }
+    }
+
+    public void OpenPuzzle()
+    {
+        if (puzzlePanel == null || IsOpen)
+        {
+            return;
+        }
+
+        previousTimeScale = Time.timeScale;
+        previousActionMap = playerInput != null ? playerInput.currentActionMap?.name : null;
+
+        if (pauseGameplay)
+        {
+            Time.timeScale = 0f;
+        }
+
+        if (playerInput != null && !string.IsNullOrWhiteSpace(puzzleActionMap))
+        {
+            playerInput.SwitchCurrentActionMap(puzzleActionMap);
+        }
+
+        puzzlePanel.SetActive(true);
+
+        if (openPuzzleButton != null)
+        {
+            openPuzzleButton.SetActive(false);
+        }
+
+        if (EventSystem.current != null && firstSelected != null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstSelected.gameObject);
+        }
+    }
+
+    public void ClosePuzzle()
+    {
+        if (!IsOpen)
+        {
+            return;
+        }
+
+        puzzlePanel.SetActive(false);
+
+        if (openPuzzleButton != null)
+        {
+            openPuzzleButton.SetActive(true);
+        }
+
+        if (pauseGameplay)
+        {
+            Time.timeScale = previousTimeScale;
+        }
+
+        if (playerInput != null && !string.IsNullOrWhiteSpace(previousActionMap))
+        {
+            playerInput.SwitchCurrentActionMap(previousActionMap);
+        }
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+
+        score = 0;
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+    }
+
+    public void TogglePuzzle()
+    {
+        if (IsOpen)
+        {
+            ClosePuzzle();
+        }
+        else
+        {
+            OpenPuzzle();
+        }
+    }
+
+    // method called when rat is clicked/hit
+    public void HitRat()
+    {
+        score++;
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+    }
+}

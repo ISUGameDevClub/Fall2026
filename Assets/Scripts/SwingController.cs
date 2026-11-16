@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,13 +19,18 @@ public class SwingController : MonoBehaviour
 
     public void OnSwing(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (PlayerController.instance.ableToMove)
         {
-            AttachToNearestHook();
-        }
-        else if (context.canceled)
-        {
-            ReleaseSwing();
+
+
+            if (context.performed)
+            {
+                AttachToNearestHook();
+            }
+            else if (context.canceled)
+            {
+                ReleaseSwing();
+            }
         }
     }
 
@@ -47,6 +53,7 @@ public class SwingController : MonoBehaviour
 
         swingJoint.distance = Vector2.Distance(transform.position, nearestHook.transform.position);
         swingJoint.enabled = true;
+        swingJoint.enableCollision = true;
     }
 
     private GameObject FindNearestHook()
@@ -68,7 +75,7 @@ public class SwingController : MonoBehaviour
         return nearestHook;
     }
 
-    private void ReleaseSwing()
+    public void ReleaseSwing()
     {
         swingJoint.enabled = false;
         swingJoint.connectedBody = null;
@@ -81,4 +88,8 @@ public class SwingController : MonoBehaviour
             Destroy(swingJoint);
         }
     }
+
+    public float getMaxHookDistance() { return maxHookDistance; }
+
+    public bool isNearHook() { return null != FindNearestHook(); }
 }
