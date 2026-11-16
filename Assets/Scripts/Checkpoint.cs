@@ -2,32 +2,16 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public Transform player;
-    public static Vector3 respawnPosition;
-    public static bool checkpointReached = false;
+    [SerializeField]private int breadcrumbs;
+    [SerializeField]private int maxBreadcrumbs;
 
-
-    private void OnTriggerEnter(Collider other)
+    public int getMaxBreadCrumbs()
     {
-        if (other.CompareTag("Player"))
-        {
-            if (other.CompareTag("Player"))
-            {
-               respawnPosition= transform. position;
-                checkpointReached = true;
-
-                Debug.Log("Checkpoint reached!");
-
-            }
-
-        }
-           
-       
+        return maxBreadcrumbs;
+    }
+    public int getBreadcrumbs()
+    {
+        return breadcrumbs;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
