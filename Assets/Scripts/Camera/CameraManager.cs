@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
         "< 1: Gradual curve\n" +
         "= 1: Linear\n" +
         "> 1: Exponential\n")]
-    [SerializeField] private float cameraChasePow = 1;
+    //[SerializeField] private float cameraChasePow = 1;
     [SerializeField] private float followZoom;
 
     // Other Variables

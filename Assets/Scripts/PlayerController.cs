@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //private float walkSpeed;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private float jumpHoldReduction = 1.1f;// after letting go of jumping how fast to reduce the vertical speed. vertical velocity is divided by this value every frame.
     private int jumpCount = 0;
     private int jumpLimit = 2;
     private bool grounded;
@@ -17,15 +18,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D body;
     private Vector2 moveInput;
-    [SerializeField] private bool jumpRequested;
+    private bool jumpRequested;
     public bool ableToMove;
     //
     [SerializeField] private GameObject Reticle;
     private Vector3 mousePos;
-    public bool aiming;
+    private bool aiming;
     private InputAction Aim;
-    public bool facingRight;
-    [SerializeField] private bool doubleJumpActive;
+    private bool facingRight;
+    private bool doubleJumpActive;
 
     //private bool jumpRequested;
     [Header("Player Consumables")]
@@ -196,7 +197,7 @@ public class PlayerController : MonoBehaviour
             }
             if (!jumpRequested && body.linearVelocityY > 0)
             {
-                body.linearVelocity = new Vector2(body.linearVelocityX, body.linearVelocityY/1.2f);
+                body.linearVelocity = new Vector2(body.linearVelocityX, body.linearVelocityY/jumpHoldReduction);
             }
 
 

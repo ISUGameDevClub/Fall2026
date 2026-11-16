@@ -4,7 +4,7 @@ public class PlayerGrappleIndicator : MonoBehaviour
 {
     [SerializeField] SwingController swingScript;
     private float maxDistance;
-    private Transform transform;
+    private new Transform transform;
     private SpriteRenderer spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
