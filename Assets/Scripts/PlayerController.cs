@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool aiming;
     private InputAction Aim;
     public bool facingRight;
+    [SerializeField] private bool doubleJumpActive;
 
     //private bool jumpRequested;
     [Header("Player Consumables")]
@@ -85,12 +86,16 @@ public class PlayerController : MonoBehaviour
     {
         if (ableToMove)
         {
-
-
             if (context.performed)
             {
                 jumpRequested = true;
-
+                //doubleJumpActive = false;
+            }
+            else
+            {
+                jumpRequested = false;
+                
+                doubleJumpActive = true;
             }
         }
     }
@@ -170,18 +175,32 @@ public class PlayerController : MonoBehaviour
 
         if (ableToMove)
         {
-            body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
+                body.linearVelocity = new Vector2(moveInput.x * speed, body.linearVelocity.y);
 
             bool canGroundJump = jumpCount == 0 && (grounded || coyoteTimeCounter > 0f);
             bool canDoubleJump = jumpCount == 1 && jumpLimit > 1;
-            if (jumpRequested && (canGroundJump || canDoubleJump))
+            if (jumpRequested && (canGroundJump))
             {
-                body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+                //body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+                body.linearVelocity = new Vector2(body.linearVelocityX, jumpHeight);
+                jumpCount++;
+                coyoteTimeCounter = 0f;
+                doubleJumpActive = false;
+            }
+            if (jumpRequested && (canDoubleJump)&&doubleJumpActive)//&&doubleJumpActive)
+            {
+                //body.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
+                body.linearVelocity = new Vector2(body.linearVelocityX, jumpHeight);
                 jumpCount++;
                 coyoteTimeCounter = 0f;
             }
+            if (!jumpRequested && body.linearVelocityY > 0)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocityX, body.linearVelocityY/1.2f);
+            }
 
-            jumpRequested = false;
+
+            //jumpRequested = false;
         }
         else if (aiming)
         {
