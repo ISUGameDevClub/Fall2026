@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public float range;
 
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -60,6 +63,8 @@ public class PlayerController : MonoBehaviour
         ableToMove = true;
         aiming = false;
         //walkSpeed = speed;
+        animator = gameObject.GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -91,8 +96,6 @@ public class PlayerController : MonoBehaviour
     }
     void Plant()
     {
-
-
         //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
@@ -110,22 +113,52 @@ public class PlayerController : MonoBehaviour
     {
         if (aiming && (BreadCrumbAmount < BreadCrumbLimit))
         {
+            animator.SetBool("Throwing", true);
             GameObject BCGO = Instantiate(BreadcrumbPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             BreadCrumbAmount++;
             //BCGO.GetComponent<BreadCrumbBehavior>().CurrentPosition = new Vector2(mousePos.x, mousePos.y);
             //BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
             BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
             BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
-            BCGO.GetComponent<BreadCrumbBehavior>().thrown=true;
+            BCGO.GetComponent<BreadCrumbBehavior>().thrown = true;
             //BCGO.GetComponent<BreadCrumbBehavior>().mousePos = new Vector2(mousePos.x, mousePos.y);
             //BCGO.GetComponent<Rigidbody2D>().AddForce(Vector2.one * 250);
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownRight = true;
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
         }
     }
-
+    public void FinishThrowing()
+    {
+        animator.SetBool("Throwing", false);
+    }
     private void FixedUpdate()
     {
+        if (moveInput.x < -0.05)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if(moveInput.x > 0.05) 
+        {
+            spriteRenderer.flipX=false;
+        }
+        if (!grounded)
+        {
+            animator.SetBool("Falling", true);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+
+        if (Mathf.Abs(moveInput.x) > 0.05 && grounded)
+        {
+            animator.SetBool("Walking", true);
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+        }
+
         if (grounded)
         {
             coyoteTimeCounter = coyoteTime;
@@ -163,19 +196,22 @@ public class PlayerController : MonoBehaviour
             if (Vector2.Distance(transform.position, mousePos) < range)
             {
                 Reticle.transform.position = mousePos;
-            if (mousePos.y > transform.position.y)
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else if (mousePos.y < transform.position.y)
-            {
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            }
+                if (mousePos.x > transform.position.x)
+                {
+                    spriteRenderer.flipX = false;
+                    facingRight = true;
+                }
+                else if (mousePos.x < transform.position.x)
+                {
+                    spriteRenderer.flipX = true;
+                    facingRight = false;
+                }
             }
         }
     }
     void StartAim()
     {
+        animator.SetBool("Aiming", true);
         ableToMove = false;
         aiming = true;
         Reticle.SetActive(true);
@@ -188,6 +224,7 @@ public class PlayerController : MonoBehaviour
     }
     void EndAim()
     {
+        animator.SetBool("Aiming", false);
         ableToMove = true;
         aiming = false;
         Reticle.SetActive(false);
