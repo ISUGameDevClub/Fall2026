@@ -7,12 +7,15 @@ TagManager:
   - Hook
   - Floor
   - PoisonObstacle
-
+  - RisingWave
+  - onTrigger
+  - offTrigger
+  - Rat
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
   - 
