@@ -1,48 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 
 {
     public GameObject CurrentCheckpoint;
-    Transform respawnpoint;
+    public Checkpoint checkpoint;
+    public Transform respawnpoint;
     private Rigidbody2D rigidbody;
-    private void Awake()
+    private PlayerController playerController;
+    private void Start()
     {
-        respawnpoint = transform;
+        respawnpoint = gameObject.transform;
         rigidbody = GetComponent<Rigidbody2D>();
+        playerController = GetComponent<PlayerController>();
     }
 
     public void SetCheckpoint(GameObject cp)
     {
         CurrentCheckpoint = cp;
+        checkpoint = CurrentCheckpoint.GetComponent<Checkpoint>();
     }
 
     public void Respawn()
     {
-        if (CurrentCheckpoint != null)
-        {
-            rigidbody.linearVelocity = Vector3.zero;
-            transform.position = respawnpoint.position;
-        }
+        rigidbody.linearVelocity = Vector3.zero;
+        transform.position = respawnpoint.position;
+        playerController.resetBreadcrumbCount();
+
     }
-     
-    void OnTriggerEnter2D(Collider2D collision)
-{
-        //Debug.Log("Collision detected with: " + collision.gameObject.name);
-        if (collision.CompareTag("Checkpoint"))
-        {
-            //Debug.Log("Checkpoint reached!");
-            respawnpoint = collision.transform;
-            CurrentCheckpoint = collision.gameObject;
 
-
-        }
-        else if (collision.CompareTag("DeathZone"))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PoisonObstacle"))
         {
             //Debug.Log("died");
             Respawn();
         }
     }
-
-    
+    public GameObject GetCheckpoint()
+    {
+        return CurrentCheckpoint;
+    }
 }

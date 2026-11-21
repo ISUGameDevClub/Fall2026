@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject BreadcrumbPrefab;
     [SerializeField] private int BreadCrumbLimit;
     public int BreadCrumbAmount;
+    private List<GameObject> BreadcrumbList = new List<GameObject>();
     //public GameObject[] breadCrumbArray;
     //This inputaction variable is because the "void OnPlant()" wasnt working, 
     //so I did it the way that works in my other project
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 jumpRequested = false;
-                
+                    
                 doubleJumpActive = true;
             }
         }
@@ -112,8 +113,8 @@ public class PlayerController : MonoBehaviour
             BCGO.GetComponent<BreadCrumbBehavior>().thrown = false;
             
             BreadCrumbAmount++;
+            BreadcrumbList.Add(BCGO);
         }
-
     }
     void ThrowObject()
     {
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour
             //BCGO.GetComponent<Rigidbody2D>().AddForce(Vector2.one * 250);
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownRight = true;
             //BCGO.GetComponent<BreadCrumbBehavior>().thrownLeft = true;
+            BreadcrumbList.Add(BCGO);
         }
     }
     public void FinishThrowing()
@@ -274,5 +276,18 @@ public class PlayerController : MonoBehaviour
     public bool IsFacingRight()
     {
         return facingRight;
+    }
+    public void setBreadCrumbLimit(int a)
+    {
+        BreadCrumbLimit = a;
+    }
+    public void resetBreadcrumbCount()
+    {
+        BreadCrumbAmount = BreadCrumbLimit;
+        foreach (GameObject c in BreadcrumbList)
+        {
+            Destroy(c);
+        }
+        BreadcrumbList.Clear();
     }
 }
