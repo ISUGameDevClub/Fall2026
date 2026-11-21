@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+
+
+
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,6 +45,10 @@ public class PlayerController : MonoBehaviour
     private InputAction Throw;
     public static PlayerController instance;
     public float range;
+
+    public bool inputDisabled; 
+
+    public bool inputDisabled; 
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -103,6 +111,11 @@ public class PlayerController : MonoBehaviour
     }
     void Plant()
     {
+        if (inputDisabled)
+        {
+            return;
+        }
+
         //Debug.Log("What");
         if (BreadCrumbAmount < BreadCrumbLimit)
         {
@@ -118,6 +131,10 @@ public class PlayerController : MonoBehaviour
     }
     void ThrowObject()
     {
+        if (inputDisabled)
+        {
+            return;
+        }
         if (aiming && (BreadCrumbAmount < BreadCrumbLimit))
         {
             animator.SetBool("Throwing", true);
@@ -167,6 +184,10 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Walking", false);
         }
 
+        if(inputDisabled)
+        {
+            return;
+        }
         if (grounded)
         {
             coyoteTimeCounter = coyoteTime;
@@ -290,4 +311,6 @@ public class PlayerController : MonoBehaviour
         }
         BreadcrumbList.Clear();
     }
+
+
 }

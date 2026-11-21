@@ -1,3 +1,6 @@
+using FMODUnity;
+using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 
@@ -51,6 +54,9 @@ public class animalControlAI : MonoBehaviour
     //How far ahead of Animal Control we check for a wall.
     [SerializeField] private float wallCheckDistance = 0.6f;
 
+    //How far ahead of Animal Control we check for a player.
+    [SerializeField] private float playerCheckDistance = 0.6f;
+
     //Which physics layer(s) count as solid level geometry.
     //Set this to the "Ground" layer in Unity's Inspector panel!!!
     [SerializeField] private LayerMask groundLayer;
@@ -78,6 +84,7 @@ public class animalControlAI : MonoBehaviour
 
     //Reference to the Animal Control's SpriteRenderer.
     //We will use this to visually flip the enemy when changing directions.
+
     private SpriteRenderer spriteRenderer;
 
     //Reference to the Animal Control's physical BoxCollider2D.
@@ -88,7 +95,21 @@ public class animalControlAI : MonoBehaviour
     //We use this to know where the Player currently is.
     private Transform playerTransform;
 
+    PlayerController playercontoller;
+    GameObject playerObject;
 
+    // Reference to the players body.
+    // We use to disable the player movement when caught. 
+    private Rigidbody2D playerRigidBody; 
+
+    // Reference to the players collision. 
+    // Use it to make the control bot collide. 
+    private CapsuleCollider2D playerCapsuleColider;
+
+
+    // Reference for the AI. 
+    // Use it to stop the AI bot movement. 
+    private bool stopMoving; 
 
     private void Awake() //Upon initialization of this particular component.
                          //"Start()" would be closer to UE5's "BeginPlay"
@@ -108,6 +129,8 @@ public class animalControlAI : MonoBehaviour
 
         bodyCollider = GetComponent<BoxCollider2D>();
 
+       
+
 
         /*
          * Search the scene for the GameObject tagged "Player."
@@ -116,13 +139,16 @@ public class animalControlAI : MonoBehaviour
          * This means Animal Control can keep track of where the Player is
          * without needing a CircleCollider2D trigger around itself.
          */
-        GameObject playerObject =
+         playerObject =
             GameObject.FindGameObjectWithTag("Player");
+        playercontoller = playerObject.GetComponent<PlayerController>();
 
         if (playerObject != null)
         {
             playerTransform = playerObject.transform;
         }
+        playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
+        playerCapsuleColider = playerObject.GetComponent<CapsuleCollider2D>();
     }
 
 
@@ -133,61 +159,30 @@ public class animalControlAI : MonoBehaviour
          * FIRST, check whether Animal Control can currently see the Player.
          * If it CAN see the Player, stop Animal Control's horizontal movement.
          */
-        if (CanSeePlayer())
-        {
-            rigidBody.linearVelocity = new Vector2(
-                0.0f, rigidBody.linearVelocity.y
-            );
+        
+        
+            if (CanSeePlayer())
+            {
+            
 
-            /*
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * AI has successfully detectedw the player.
-             * At this point, the player is supposed to be sent back to their
-             * most recent checkpoint, no?
-             * 
-             * Whatever returns the player to the last checkpoint SHOULD BE CALLED HERE!!!
-             * AI sees player -> AI stops moving (for as long as the palyer is seen) ->
-             * -> reset player to previous checkpoint. 
-             * 
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * 
-             * 
-             * 
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * 
-             * 
-             * 
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * 
-             * 
-             * 
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * 
-             * 
-             * 
-             * TODO: PLAYER CHECKPOINT LOGIC GOES HERE!!!
-             * 
-             * 
-             * 
-             * 
-             * 
-             */
+            //AI has successfully detected the player.
+            playercontoller.inputDisabled = true;
+                playerRigidBody.linearVelocity = new Vector2(0f,0f);
 
-            //Return ends this particular FixedUpdate() here.
-            //This prevents the normal patrol behavior below from running.
-            return;
-        }
+            //Commented code below is if we want to overlap the bot and make them stop moving. 
+                    //playerCapsuleColider.isTrigger = true;
+                    //playerRigidBody.gravityScale = 0f;
+                //gameObject("Player") set linear velocity to zero; 
+            //Move to collide with player funciton. 
 
-
-        /*
-         * If Animal Control DOESN'T see teh Player, continue patrolling.
-         *
-         * Turn around if:
+                //Return ends this particular FixedUpdate() here.
+                //This prevents the normal patrol behavior below from running.
+                //return;
+            }
+        
+         //If Animal Control DOESN'T see teh Player, continue patrolling.
+       
+         /* Turn around if:
          *     1. There is a wall ahead
          * OR
          *      2. There is NOT ground ahead (a ledge)
@@ -208,9 +203,14 @@ public class animalControlAI : MonoBehaviour
          * We preserve the existing Y-velocity so gravity is
          * still free to make Animal Control fall normally. (I think)
          */
-        rigidBody.linearVelocity = new Vector2(
+
+        if (stopMoving == false)
+        { rigidBody.linearVelocity = new Vector2(
             moveDirection * moveSpeed, rigidBody.linearVelocity.y
         );
+        }
+
+        
     }
 
 
@@ -244,7 +244,19 @@ public class animalControlAI : MonoBehaviour
         {
             TurnAround();
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("stop");
+            stopMoving = true; 
+            rigidBody.linearVelocity = new Vector2(
+               0.0f, rigidBody.linearVelocity.y
+               );
+        }
+
+
     }
+
+
 
 
 
@@ -482,6 +494,7 @@ public class animalControlAI : MonoBehaviour
             groundLayer              //Layers to detect (Ground!)
         );
 
+       // Debug.Log("Found Ledge: " + groundHit == null);
         //No Ground layer underneath the forward point = there is a ledge ahead.
         return groundHit.collider == null;
     }
