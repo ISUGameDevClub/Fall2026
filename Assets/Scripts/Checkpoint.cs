@@ -15,8 +15,9 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")&&respawn.GetCheckpoint()!=gameObject)
         {
-            Debug.Log("Checkpoint reached!");
-            respawn.respawnpoint = gameObject.transform;
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            //Debug.Log("Checkpoint reached!");
+            respawn.respawnpoint = playerObject.transform;
             respawn.CurrentCheckpoint = gameObject;
             //controller.setBreadCrumbAmount(breadcrumbs);
             controller.setBreadCrumbLimit(maxBreadcrumbs);

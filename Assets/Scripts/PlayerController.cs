@@ -46,9 +46,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public float range;
 
-    public bool inputDisabled; 
-
-    public bool inputDisabled; 
+    public bool inputDisabled = false; 
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;

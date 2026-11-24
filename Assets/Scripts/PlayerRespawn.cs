@@ -27,7 +27,7 @@ public class PlayerRespawn : MonoBehaviour
         rigidbody.linearVelocity = Vector3.zero;
         transform.position = respawnpoint.position;
         playerController.resetBreadcrumbCount();
-
+        playerController.inputDisabled = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -2,6 +2,7 @@ using FMODUnity;
 using Unity.VisualScripting;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using System.Collections;
 
 
 /*
@@ -55,7 +56,7 @@ public class animalControlAI : MonoBehaviour
     [SerializeField] private float wallCheckDistance = 0.6f;
 
     //How far ahead of Animal Control we check for a player.
-    [SerializeField] private float playerCheckDistance = 0.6f;
+    //[SerializeField] private float playerCheckDistance = 0.6f;
 
     //Which physics layer(s) count as solid level geometry.
     //Set this to the "Ground" layer in Unity's Inspector panel!!!
@@ -106,6 +107,10 @@ public class animalControlAI : MonoBehaviour
     // Use it to make the control bot collide. 
     private CapsuleCollider2D playerCapsuleColider;
 
+    private PlayerRespawn playerRespawn;
+
+    public float timeBeforeFree;
+    // Once bot finds player it freezes, but how long to wait before unfreezing
 
     // Reference for the AI. 
     // Use it to stop the AI bot movement. 
@@ -149,6 +154,7 @@ public class animalControlAI : MonoBehaviour
         }
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
         playerCapsuleColider = playerObject.GetComponent<CapsuleCollider2D>();
+        playerRespawn = playerObject.GetComponent<PlayerRespawn>();
     }
 
 
@@ -163,11 +169,13 @@ public class animalControlAI : MonoBehaviour
         
             if (CanSeePlayer())
             {
-            
-
             //AI has successfully detected the player.
             playercontoller.inputDisabled = true;
                 playerRigidBody.linearVelocity = new Vector2(0f,0f);
+            IEnumerator coroutine;
+            coroutine = UnfreezePlayer();
+            StartCoroutine(coroutine);
+            //UnfreezePlayer();
 
             //Commented code below is if we want to overlap the bot and make them stop moving. 
                     //playerCapsuleColider.isTrigger = true;
@@ -179,6 +187,11 @@ public class animalControlAI : MonoBehaviour
                 //This prevents the normal patrol behavior below from running.
                 //return;
             }
+            IEnumerator UnfreezePlayer()
+        {
+            yield return new WaitForSeconds(timeBeforeFree);
+            playercontoller.inputDisabled = false;
+        }
         
          //If Animal Control DOESN'T see teh Player, continue patrolling.
        
@@ -233,7 +246,7 @@ public class animalControlAI : MonoBehaviour
 
 
     //Called when teh Animal Control's physical collider hits another collider.
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTiggerEnter2D(Collider2D collision)
     {
         /*
          * Check whether the GameObject we hit has the "AnimalControl" tag.
@@ -246,19 +259,16 @@ public class animalControlAI : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("stop");
-            stopMoving = true; 
-            rigidBody.linearVelocity = new Vector2(
-               0.0f, rigidBody.linearVelocity.y
-               );
+            playerRespawn.Respawn();
         }
-
-
     }
-
-
-
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerRespawn.Respawn();
+        }
+    }
 
     //Checks whether Animal Control can currently see the Player.
     private bool CanSeePlayer()
