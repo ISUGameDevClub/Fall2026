@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -126,6 +127,15 @@ public class PlayerController : MonoBehaviour
 
             BreadCrumbAmount++;
             BreadcrumbList.Add(BCGO);
+        }
+    }
+    public void addBreadCrumbs(int increase)
+    {
+        if (BreadCrumbAmount < BreadCrumbLimit)
+        {
+            BreadCrumbAmount += increase;
+            if (BreadCrumbAmount > BreadCrumbLimit)
+                BreadCrumbAmount -= (BreadCrumbAmount - BreadCrumbLimit);
         }
     }
     void ThrowObject()

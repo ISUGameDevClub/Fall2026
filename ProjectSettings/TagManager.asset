@@ -10,6 +10,9 @@ TagManager:
   - AnimalControl
   - Checkpoint
   - Grate
+  - Rat  - RisingWave
+  - onTrigger
+  - offTrigger
   - Rat
   layers:
   - Default
