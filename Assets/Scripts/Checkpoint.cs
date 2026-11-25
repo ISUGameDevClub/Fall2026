@@ -6,19 +6,22 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]private int maxBreadcrumbs;
     private PlayerRespawn respawn;
     private PlayerController controller;
+    private GameObject playerObject;
     private void Awake()
     {
-        respawn = FindAnyObjectByType<PlayerRespawn>();
-        controller = FindAnyObjectByType<PlayerController>();
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        respawn = playerObject.GetComponent<PlayerRespawn>();
+        controller = playerObject.GetComponent<PlayerController>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")&&respawn.GetCheckpoint()!=gameObject)
+        if (collision.gameObject.CompareTag("Player"))//&&respawn.GetCheckpoint()!=gameObject)
         {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             //Debug.Log("Checkpoint reached!");
-            respawn.respawnpoint = playerObject.transform;
-            respawn.CurrentCheckpoint = gameObject;
+            Vector2 a = playerObject.transform.position;
+            respawn.respawnpoint = a;
+            //respawn.CurrentCheckpoint = gameObject;
+            respawn.checkpoint = gameObject.GetComponent<Checkpoint>();
             //controller.setBreadCrumbAmount(breadcrumbs);
             controller.setBreadCrumbLimit(maxBreadcrumbs);
         }

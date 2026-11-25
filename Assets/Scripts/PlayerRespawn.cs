@@ -4,28 +4,29 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 
 {
-    public GameObject CurrentCheckpoint;
+    //public GameObject CurrentCheckpoint;
     public Checkpoint checkpoint;
-    public Transform respawnpoint;
+    public Vector2 respawnpoint;
     private Rigidbody2D rigidbody;
     private PlayerController playerController;
     private void Start()
     {
-        respawnpoint = gameObject.transform;
+        Vector2 a = transform.position;
+        respawnpoint = a;
         rigidbody = GetComponent<Rigidbody2D>();
         playerController = GetComponent<PlayerController>();
     }
 
-    public void SetCheckpoint(GameObject cp)
-    {
-        CurrentCheckpoint = cp;
-        checkpoint = CurrentCheckpoint.GetComponent<Checkpoint>();
-    }
+    //public void SetCheckpoint(GameObject cp)
+    //{
+    //    CurrentCheckpoint = cp;
+    //    checkpoint = CurrentCheckpoint.GetComponent<Checkpoint>();
+    //}
 
     public void Respawn()
     {
         rigidbody.linearVelocity = Vector3.zero;
-        transform.position = respawnpoint.position;
+        transform.position = respawnpoint;
         playerController.resetBreadcrumbCount();
         playerController.inputDisabled = false;
     }
@@ -38,8 +39,8 @@ public class PlayerRespawn : MonoBehaviour
             Respawn();
         }
     }
-    public GameObject GetCheckpoint()
-    {
-        return CurrentCheckpoint;
-    }
+    //public GameObject GetCheckpoint()
+    //{
+    //    return CurrentCheckpoint;
+    //}
 }

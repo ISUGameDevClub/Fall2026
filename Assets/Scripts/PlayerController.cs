@@ -35,8 +35,9 @@ public class PlayerController : MonoBehaviour
     //private bool jumpRequested;
     [Header("Player Consumables")]
     [SerializeField] private GameObject BreadcrumbPrefab;
-    [SerializeField] private int BreadCrumbLimit;
-    public int BreadCrumbAmount;
+    [SerializeField] public int BreadCrumbLimit;
+    public int BreadCrumbAmount;//amount of breadcrumbs in game player should start with 0 and it increments when one is placed.
+                                //not intuitive at all but at this point i dont feel like changing it
     private List<GameObject> BreadcrumbList = new List<GameObject>();
     //public GameObject[] breadCrumbArray;
     //This inputaction variable is because the "void OnPlant()" wasnt working, 
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void Plant()
+    public void Plant()
     {
         if (inputDisabled)
         {
@@ -302,7 +303,7 @@ public class PlayerController : MonoBehaviour
     }
     public void resetBreadcrumbCount()
     {
-        BreadCrumbAmount = BreadCrumbLimit;
+        BreadCrumbAmount = 0;// BreadCrumbLimit;
         foreach (GameObject c in BreadcrumbList)
         {
             Destroy(c);
