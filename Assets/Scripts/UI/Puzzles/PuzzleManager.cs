@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private string puzzleActionMap;
     [SerializeField] private bool pauseGameplay = true;
 
+    [SerializeField] private int[] correctAnswer;
+
     [Header("Pipes")]
     [SerializeField] private GameObject[] PipePuzzlePrefabs;
     
@@ -22,6 +25,7 @@ public class PuzzleManager : MonoBehaviour
     private string previousActionMap;
 
     public bool IsOpen => puzzlePanel != null && puzzlePanel.activeSelf;
+
 
     private void Awake()
     {
