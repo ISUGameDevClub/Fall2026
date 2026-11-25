@@ -8,6 +8,9 @@ TagManager:
   - Floor
   - PoisonObstacle
   - AnimalControl
+  - Checkpoint
+  - Grate
+  - Rat
   layers:
   - Default
   - TransparentFX

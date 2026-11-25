@@ -102,7 +102,10 @@ public class BreadCrumbBehavior : MonoBehaviour
             GetComponent<Rigidbody2D>().gravityScale = 0; //only setting gravity to 0 still allowed them to fall for some reason
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
             GetComponent<Rigidbody2D>().constraints &= ~RigidbodyConstraints2D.FreezePositionY;// its a bandaid fix but it works well enough
+            collectable = true;
         }
+        
+
         
         //if (coll.gameObject.CompareTag("Floor") && thrown)
         //{
@@ -123,6 +126,14 @@ public class BreadCrumbBehavior : MonoBehaviour
             collectable = true;
            // Debug.Log("let the player pickup the breadcrumbs");
             //Debug.Log("Add gameobject to breadcrumbarray")
+        }
+    }
+    private void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.gameObject.CompareTag("Rat"))
+        {
+            if (Mathf.Abs(gameObject.transform.position.x - coll.gameObject.transform.position.x) < .01f)
+                coll.GetComponent<RatEnemy>().destroyBreadCrumb(gameObject);
         }
     }
 }

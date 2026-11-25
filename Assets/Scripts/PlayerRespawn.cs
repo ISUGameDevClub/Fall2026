@@ -9,12 +9,14 @@ public class PlayerRespawn : MonoBehaviour
     public Vector2 respawnpoint;
     private Rigidbody2D rigidbody;
     private PlayerController playerController;
+    GameObject[] rats;
     private void Start()
     {
         Vector2 a = transform.position;
         respawnpoint = a;
         rigidbody = GetComponent<Rigidbody2D>();
         playerController = GetComponent<PlayerController>();
+        rats = GameObject.FindGameObjectsWithTag("Rat");
     }
 
     //public void SetCheckpoint(GameObject cp)
@@ -29,6 +31,13 @@ public class PlayerRespawn : MonoBehaviour
         transform.position = respawnpoint;
         playerController.resetBreadcrumbCount();
         playerController.inputDisabled = false;
+
+        
+        foreach(GameObject a in rats)
+        {
+            Debug.Log(rats.Length);
+            a.SetActive(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

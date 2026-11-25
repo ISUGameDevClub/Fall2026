@@ -16,7 +16,7 @@ public class RatHitbox : MonoBehaviour
         if (collision.gameObject.tag == "Breadcrumb")
         {
             nearCrumb = true;
-            enemyScript.SetTarget(collision.transform);
+            //enemyScript.SetTarget(collision.transform);
         }
     }
 

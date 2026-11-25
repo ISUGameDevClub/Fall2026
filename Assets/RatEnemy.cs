@@ -1,37 +1,35 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class RatEnemy : MonoBehaviour
 {
-    [SerializeField] public GameObject breadcrumb;
-    [SerializeField] public RatHitbox rat_hitbox_script;
-    [SerializeField] public GameObject rat_starting_position;
-    public Transform target;
-    public Transform rat_transform;
+    //[SerializeField] public GameObject breadcrumb;
+    //[SerializeField] public RatHitbox rat_hitbox_script;
+    private Vector2 ratStartPos;
+    private Vector2 target;
+    private List<GameObject> breadcrumbList;
     public float speed;
-    public bool nearCrumb = false;
 
     void Start()
     {
-        nearCrumb = rat_hitbox_script.isNearCrumb();
-        rat_transform = GetComponent<Transform>();
+        ratStartPos = transform.position;
+        breadcrumbList = new List<GameObject>();
     }
 
     private void Update()
     {
-        nearCrumb = rat_hitbox_script.isNearCrumb();
-        if (nearCrumb)
+        //nearCrumb = rat_hitbox_script.isNearCrumb();
+        if (breadcrumbList.Count > 0 && breadcrumbList[0] != null)
         {
-            if (target != null)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            }
-
-            if (rat_transform.position == rat_starting_position.transform.position)
-            {
-                SetTarget(null);
-            }
+            target = breadcrumbList[0].transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
+        else
+        {
+            //target = ratStartPos;
+            transform.position = Vector3.MoveTowards(transform.position,ratStartPos, speed * Time.deltaTime);
         }
     }
 
@@ -43,16 +41,20 @@ public class RatEnemy : MonoBehaviour
             // Destroy(gameObject);
             // NOTE: May change to destroy instead of set active = false depending on later systems
         }
-
-        if (collision.gameObject.tag == "Breadcrumb")
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.name == "BreadCrumbPrefab(Clone)")
         {
-            Destroy(breadcrumb);
-            SetTarget(rat_starting_position.transform);
+            breadcrumbList.Add(col.gameObject);
         }
     }
-
-    public void SetTarget(Transform target)
+    public void destroyBreadCrumb(GameObject a)
     {
-        this.target = target;
+        if (a == breadcrumbList[0])
+        {
+            breadcrumbList.RemoveAt(0);
+            Destroy(a.gameObject);
+        }
     }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8414389962039384453}
   - component: {fileID: 4078710836102083404}
   - component: {fileID: 6884722518628957188}
+  - component: {fileID: 7382885707997353425}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,15 +117,14 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 3.3
   coyoteTime: 0.1
-  jumpRequested: 0
+  jumpHoldReduction: 1.1
   ableToMove: 1
   Reticle: {fileID: 9020524320990406629}
-  aiming: 0
-  facingRight: 0
   BreadcrumbPrefab: {fileID: 4791326648646073533, guid: 77d0a2850dab0e54aa359af80f6dba35, type: 3}
   BreadCrumbLimit: 3
   BreadCrumbAmount: 0
   range: 5
+  inputDisabled: 0
 --- !u!114 &4463789522434062145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   cameraFollowPosition: {x: 1.5, y: 1, z: 0}
   stiffness: 3
-  cameraChasePow: 1
   followZoom: 0
 --- !u!95 &6884722518628957188
 Animator:
@@ -331,6 +330,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7382885707997353425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164862472449035833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2ed3be37533284f94aa32e1e83ef65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  checkpoint: {fileID: 0}
+  respawnpoint: {x: 0, y: 0}
 --- !u!1 &7250921764287822733
 GameObject:
   m_ObjectHideFlags: 0
