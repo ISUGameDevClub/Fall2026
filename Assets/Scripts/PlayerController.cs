@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             BCGO.GetComponent<BreadCrumbBehavior>().parent = gameObject;
             BCGO.GetComponent<BreadCrumbBehavior>().target = Reticle;
             BCGO.GetComponent<BreadCrumbBehavior>().thrown = false;
-            
+
             BreadCrumbAmount++;
             BreadcrumbList.Add(BCGO);
         }
@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D Coll)
     {
-        if (Coll.gameObject.CompareTag("Floor"))
+        if (Coll.gameObject.CompareTag("Floor")|| Coll.gameObject.CompareTag("Grate"))
         {
             groundColliders.Add(Coll.collider);
             grounded = true;
