@@ -13,7 +13,7 @@ TagManager:
   - Rat  - RisingWave
   - onTrigger
   - offTrigger
-  - Rat
+  - Rat  - WaterHazard
   layers:
   - Default
   - TransparentFX

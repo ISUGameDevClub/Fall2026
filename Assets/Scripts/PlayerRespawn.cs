@@ -35,7 +35,6 @@ public class PlayerRespawn : MonoBehaviour
         
         foreach(GameObject a in rats)
         {
-            Debug.Log(rats.Length);
             a.SetActive(true);
         }
     }

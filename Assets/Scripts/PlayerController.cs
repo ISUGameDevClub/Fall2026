@@ -298,6 +298,7 @@ public class PlayerController : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Floor"))
         {
+            grounded = false;
             groundColliders.Remove(coll.collider);
             grounded = groundColliders.Count > 0;
         }
@@ -320,6 +321,18 @@ public class PlayerController : MonoBehaviour
         }
         BreadcrumbList.Clear();
     }
+   //public int getBreadcrumbs()
+   // {
+   //     return BreadCrumbAmount;
+   // }
 
+   // public void setBreadcrumbs(int breadcrumbs)
+   // {
+   //     BreadCrumbAmount = breadcrumbs;
+   // }
+    public bool getGrounded()
+    {
+        return grounded;
+    }
 
 }
