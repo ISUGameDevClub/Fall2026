@@ -48,8 +48,8 @@ public class WaveBehavior : MonoBehaviour
         spriteRenderer.enabled = false;
         startingPosition = transform.position;
         StartCoroutine(WaveLoop());
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
-        
     }
 
     // Update is called once per frame
@@ -168,7 +168,7 @@ public class WaveBehavior : MonoBehaviour
         
         if (other.CompareTag("Rat"))
         {
-            Debug.Log("Rat hit put rat kill here");
+            other.gameObject.SetActive(false);
         }
         if (other.CompareTag("Player"))
         {

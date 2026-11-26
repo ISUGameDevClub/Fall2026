@@ -7,7 +7,7 @@ public class Button_Mastermind : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] InputActionReference Mastermind;
     bool active = false;
-    int state = 0;
+    //int state = 0;
     private int currentColor = 0;
     public static MastermindManager manager;
     private Color[] colors;
